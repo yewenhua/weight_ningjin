@@ -118,6 +118,8 @@ async function receiveData(msg){
 async function reportGarbageData(){
     ids = [];
     let datalist;
+    let data = [];
+    let itemParam = {};
     let latest_report = await mssql_async('SELECT * FROM Weight ORDER BY secondWeightTime DESC');
     if(latest_report && latest_report.length > 0){
         //从上一次上报的数据的下一条开始继续上报
@@ -128,12 +130,6 @@ async function reportGarbageData(){
         //未曾上报过数据
         datalist = await mssql_async('SELECT * FROM Trade WHERE id > 5000 and datastatus != 9');
     }
-
-    //上报失败的数据重新上报
-    let fail_sql = "SELECT * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
-    let fail_report = await mssql_async(fail_sql);
-    let data = [];
-    let itemParam = {};
 
     //第一次上报的数据
     for(let item of datalist){
@@ -163,7 +159,23 @@ async function reportGarbageData(){
         ids.push(item.id);
     };
 
+    //插入上报数据记录
+    if(data.length > 0){
+        let insertSql = 'INSERT INTO Weight ( `lsh`, `carNo`, `cardNo`, `proCode`, `firstWeightTime`, `secondWeightTime`, `gross`, `tare`, `net`, `dataStatus`, `statDateNum` ) VALUES ';
+        let i = 0;
+        for(let item of data){
+            if(i!=0){
+                insertSql += ',';
+            }
+            insertSql += '(' + item.id + item.truckno + item.cardNo + item.proCode + item.firstWeightTime + item.secondWeightTime + item.gross + item.tare + item.net + item.dataStatus + item.statDateNum + ')';
+            i++;
+        }
+        await mssql_async(insertSql);
+    }
+
     //上报失败的数据重新上报
+    let fail_sql = "SELECT * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
+    let fail_report = await mssql_async(fail_sql);
     for(let item of fail_report){
         itemParam =
         {
