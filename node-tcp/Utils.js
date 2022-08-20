@@ -80,3 +80,6 @@ exports.BytesCount = (str)=>{
 exports.wait = async (ms) => {
     return new Promise(resolve => setTimeout(() => resolve(), ms));
 };
+
+exports.formatDateNumber = time => moment(time)
+    .format('YYYYMMDD');

@@ -10,6 +10,7 @@ let facId = 'NWSP.WHKDJC';              //平台获取
 let msgId = 1000000;                    //初始msgId
 let aes_key = '176d3805f01deeab';       //密钥长度16，自己随机生成
 let overageBuffer, public_key;          //包缓存，公钥
+let ids = [];                           //上报的数据id集合
 let tsf = new PackageTransform();
 
 //创建TCP客户端对象
@@ -85,6 +86,10 @@ async function receiveData(msg){
                 break;
             case 2:
                 //response响应消息
+                if(ids.length > 0){
+                    //更新上报状态
+                    updateReportStatus('success', ids);
+                }
                 break;
             case 3:
                 //ping
@@ -112,6 +117,7 @@ async function receiveData(msg){
 //上报地磅测点数据
 async function reportDcsData(){
     //获取未上报或上报失败的测点数据，每次获取20条
+    ids = [];
     let datalist = await MongoDB().findLimit('gas', {
         $or:[{flag: 'success'},{flag: 'init'}]
     }, 1, 20);
@@ -129,21 +135,33 @@ async function reportDcsData(){
             "sysId":1    //系统编号(用于区分同一个电厂的一期、二期)
         };
         data.push(itemParam);
+        ids.push(item._id);
     }
 
-    let msgContent = JSON.stringify({
-        secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
-        data: Utils.aes_encode2(aes_key, JSON.stringify(data))  //使用本地AES秘钥加密数据
+    if(data.length > 0){
+        let msgContent = JSON.stringify({
+            secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
+            data: Utils.aes_encode2(aes_key, JSON.stringify(data))  //使用本地AES秘钥加密数据
+        });
+
+        let params = {
+            msgType: 6,             //消息类型  5地磅  6测点数据
+            //msgId: msgId,         //每次请求唯一标识
+            facKey: facKey,         //发送方发送数据所需密钥
+            facId: facId,           //发送方注册唯一标识
+            contentLength: Utils.BytesCount(msgContent),
+            msgContent: msgContent
+        };
+
+        await sendData(params);
+    }
+}
+
+//更新上报状态
+async function updateReportStatus(status='success', ids){
+    await MongoDB().updateMany('gas', {
+        _id: { $in: ids }
+    }, {
+        flag: 'success'
     });
-
-    let params = {
-        msgType: 6,             //消息类型  5地磅  6测点数据
-        //msgId: msgId,         //每次请求唯一标识
-        facKey: facKey,         //发送方发送数据所需密钥
-        facId: facId,           //发送方注册唯一标识
-        contentLength: Utils.BytesCount(msgContent),
-        msgContent: msgContent
-    };
-
-    await sendData(params);
 }

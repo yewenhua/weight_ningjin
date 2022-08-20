@@ -2,7 +2,7 @@
 const net = require('net');
 const PackageTransform = require('./PackageTransform');
 const Utils = require('./Utils');
-const MongoDB = require('./MongoDb');
+const mssql_async = require('./MssqlDb');
 
 //参数初始化
 let facKey = '2022081504080048_2602S';  //平台获取
@@ -10,6 +10,7 @@ let facId = 'NWSP.WHKDJC';              //平台获取
 let msgId = 1000000;                    //初始msgId
 let aes_key = '176d3805f01deeab';       //密钥长度16，自己随机生成
 let overageBuffer, public_key;          //包缓存，公钥
+let ids = [];                           //上报的数据id集合
 let tsf = new PackageTransform();
 
 //创建TCP客户端对象
@@ -85,6 +86,10 @@ async function receiveData(msg){
                 break;
             case 2:
                 //response响应消息
+                if(ids.length > 0){
+                    //更新上报状态
+                    updateReportStatus('success', ids);
+                }
                 break;
             case 3:
                 //ping
@@ -111,55 +116,100 @@ async function receiveData(msg){
 
 //上报地磅数据
 async function reportGarbageData(){
-    let datalist = await MongoDB().findLimit('gas', {
-        $or:[
-            {
-                flag: 'success'
-            },
-            {
-                flag: 'init',
-            }
-        ]
-    }, 1, 20);
+    ids = [];
+    let datalist;
+    let latest_report = await mssql_async('SELECT * FROM Weight ORDER BY secondWeightTime DESC');
+    if(latest_report && latest_report.length > 0){
+        //从上一次上报的数据的下一条开始继续上报
+        let sql = 'SELECT * FROM Trade WHERE seconddatetime > ' + latest_report[0]['secondWeightTime'] + 'AND datastatus != 9 ORDER BY seconddatetime ASC';
+        datalist = await mssql_async(sql);
+    }
+    else{
+        //未曾上报过数据
+        datalist = await mssql_async('SELECT * FROM Trade WHERE id > 5000 and datastatus != 9');
+    }
 
+    //上报失败的数据重新上报
+    let fail_sql = "SELECT * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
+    let fail_report = await mssql_async(fail_sql);
     let data = [];
     let itemParam = {};
+
+    //第一次上报的数据
     for(let item of datalist){
+        if(!item.gross || !item.tare){
+            continue;
+        }
+
         itemParam =
         {
-            "lsh": "10001",  //流水号
-            "carNo": "浙C88888",
-            "cardNo": "888888", //ic卡号
+            "lsh": item.id,  //流水号
+            "carNo": item.truckno,
+            "cardNo": item.cardNo, //ic卡号
             "proCode": 1,     //1：生活垃圾；2：飞灰；3：炉渣；4：渗滤液；5：活性炭；6：消石灰；7：螯合剂；8：水泥；9：氨水；10：盐酸
-            //"originalSourceArea": null,  //地磅系统中的货物来源
-            //"transportUnit": null,       //运输单位
-            "firstWeightTime": new Date('2022-08-16 12:24:36'),     //进厂时间，精确到时分秒
-            "secondWeightTime": new Date('2022-08-16 12:34:36'),    //出厂时间，精确到时分秒
-            "gross": 4000.00,  //毛重，单位：kg
-            "tare": 1900.00,   //皮重，单位：kg
-            "net": 2100.00,    //净重，单位：kg
-            //"operator": null,  //称重员
+            //"originalSourceArea": item.sender,  //地磅系统中的货物来源
+            //"transportUnit": item.transporter,       //运输单位
+            "firstWeightTime": new Date(item.firstdatetime),     //进厂时间，精确到时分秒
+            "secondWeightTime": new Date(item.seconddatetime),    //出厂时间，精确到时分秒
+            "gross": item.gross,  //毛重，单位：kg
+            "tare": item.tare,   //皮重，单位：kg
+            "net": item.net,    //净重，单位：kg
+            //"operator": item.operator,  //称重员
             //"tradeSysId": 1,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
-            //"orgId": null,     //组织id
             "dataStatus": 1,    //数据状态 1:生效 2:作废
-            "statDateNum": 200220816  //磅单归属日期，值为出厂时间(secondWeightTime)的日期格式化，格式为：yyyyMMdd
+            "statDateNum": Utils.formatDateNumber((new Date()).getTime())  //磅单归属日期，值为出厂时间(secondWeightTime)的日期格式化，格式为：yyyyMMdd
         }
         data.push(itemParam);
+        ids.push(item.id);
     };
 
-    let msgContent = JSON.stringify({
-        secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
-        data: Utils.aes_encode2(aes_key, JSON.stringify(data))
-    });
+    //上报失败的数据重新上报
+    for(let item of fail_report){
+        itemParam =
+        {
+            "lsh": item.lsh,  //流水号
+            "carNo": item.carNo,
+            "cardNo": item.cardNo, //ic卡号
+            "proCode": item.proCode,     //1：生活垃圾；2：飞灰；3：炉渣；4：渗滤液；5：活性炭；6：消石灰；7：螯合剂；8：水泥；9：氨水；10：盐酸
+            //"originalSourceArea": item.originalSourceArea,  //地磅系统中的货物来源
+            //"transportUnit": item.transportUnit,       //运输单位
+            "firstWeightTime": item.firstWeightTime,     //进厂时间，精确到时分秒
+            "secondWeightTime": item.secondWeightTime,    //出厂时间，精确到时分秒
+            "gross": item.gross,  //毛重，单位：kg
+            "tare": item.tare,   //皮重，单位：kg
+            "net": item.net,    //净重，单位：kg
+            //"operator": item.operator,  //称重员
+            //"tradeSysId": item.tradeSysId,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
+            //"orgId": item.orgId,     //组织id
+            "dataStatus": item.dataStatus,    //数据状态 1:生效 2:作废
+            "statDateNum": item.statDateNum  //磅单归属日期，值为出厂时间(secondWeightTime)的日期格式化，格式为：yyyyMMdd
+        }
+        data.push(itemParam);
+        ids.push(item.lsh);
+    }
 
-    let param = {
-        msgType: 5,             //消息类型 5地磅  6测点数据
-        //msgId: msgId,         //每次请求唯一标识
-        facKey: facKey,         //发送方发送数据所需密钥
-        facId: facId,           //发送方注册唯一标识
-        contentLength: Utils.BytesCount(msgContent),
-        msgContent: msgContent
-    };
+    if(data.length > 0){
+        let msgContent = JSON.stringify({
+            secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
+            data: Utils.aes_encode2(aes_key, JSON.stringify(data))
+        });
 
-    await sendData(param);
+        let param = {
+            msgType: 5,             //消息类型 5地磅  6测点数据
+            //msgId: msgId,         //每次请求唯一标识
+            facKey: facKey,         //发送方发送数据所需密钥
+            facId: facId,           //发送方注册唯一标识
+            contentLength: Utils.BytesCount(msgContent),
+            msgContent: msgContent
+        };
+
+        await sendData(param);
+    }
+}
+
+//更新上报状态
+async function updateReportStatus(status='success', id_arr){
+    let ids = id_arr.join();
+    let sql = 'UPDATE Weight SET flag = ' + status + ' WHERE id IN ' + '(' + ids + ')';
+    await mssql_async(sql);
 }
