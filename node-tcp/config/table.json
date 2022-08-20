@@ -1,0 +1,13 @@
+{
+    "gas": {
+        "tag": "String",
+        "value": "String",
+        "datetime": "String",
+        "cn_name": "String",
+        "flag": "String",
+        "code": "String",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "deletetime": "Date"
+    }
+}

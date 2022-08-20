@@ -1,0 +1,5 @@
+{
+	"required": "必须，不能为空",
+	"missing_field": "字段丢失",
+	"invalid": "无效"
+}
