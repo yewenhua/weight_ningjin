@@ -150,7 +150,7 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.insert(data);
-            if (res.result.ok == 1) {
+            if (res.insertedId) {
                 reslove(true);
             }
             else{
@@ -169,10 +169,10 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.insertMany(data);
-            if (res.result.ok == 1) {
+            if (res.insertedCount >= 1) {
                 reslove({
                     ok: true,
-                    n: res.result.n
+                    n: res.insertedCount
                 });
             }
             else{
@@ -180,7 +180,6 @@ class DB {
             }
         });
     }
-
 
     /**
      * 更新一条数据
@@ -193,7 +192,7 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.updateOne(condition, { $set: data });
-            if (res.result.ok == 1) {
+            if (res.modifiedCount  == 1) {
                 reslove(true);
             }
             else{
@@ -213,12 +212,10 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.updateMany(condition, { $set: data });
-            console.log('1111111111111111');
-            console.log(res);
-            if (res.result.ok == 1) {
+            if (res.modifiedCount >= 1) {
                 reslove({
                     ok: true,
-                    n: res.result.n
+                    n: res.modifiedCount
                 });
             }
             else{
@@ -237,7 +234,7 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.deleteOne(condition);
-            if (res.result.ok == 1 && res.result.n != 0) {
+            if (res.deletedCount  == 1) {
                 reslove(true);
             }
             else{
@@ -256,10 +253,10 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.deleteMany(condition);
-            if (res.result.ok == 1 && res.result.n != 0) {
+            if (res.deletedCount >= 1) {
                 reslove({
                     ok: true,
-                    n: res.result.n
+                    n: res.deletedCount
                 });
             }
             else{
