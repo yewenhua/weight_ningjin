@@ -12,11 +12,10 @@ module.exports = app => {
         },
         datetime: {
             type: Number,
-            required: [ true, 'acquisitionDatetime 是必须的' ] //指标采集时间戳。unix时间戳，单位 毫秒
+            required: [ true, 'datetime 是必须的' ] //指标采集时间戳。unix时间戳，单位 毫秒
         },
         cn_name: {
             type: String,
-            required: [ true, '设备中文名称是必须的' ]
         },
         code: {
             type: String,
