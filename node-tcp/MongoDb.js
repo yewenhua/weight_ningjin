@@ -149,12 +149,16 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.insert(data);
-            if (res.insertedId) {
-                reslove(true);
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.insert(data);
+                if (res.insertedId) {
+                    reslove(true);
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
@@ -168,15 +172,19 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.insertMany(data);
-            if (res.insertedCount >= 1) {
-                reslove({
-                    ok: true,
-                    n: res.insertedCount
-                });
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.insertMany(data);
+                if (res.insertedCount >= 1) {
+                    reslove({
+                        ok: true,
+                        n: res.insertedCount
+                    });
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
@@ -191,12 +199,16 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.updateOne(condition, { $set: data });
-            if (res.modifiedCount  == 1) {
-                reslove(true);
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.updateOne(condition, { $set: data });
+                if (res.modifiedCount  == 1) {
+                    reslove(true);
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
@@ -211,15 +223,19 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.updateMany(condition, { $set: data });
-            if (res.modifiedCount >= 1) {
-                reslove({
-                    ok: true,
-                    n: res.modifiedCount
-                });
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.updateMany(condition, { $set: data });
+                if (res.modifiedCount >= 1) {
+                    reslove({
+                        ok: true,
+                        n: res.modifiedCount
+                    });
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
@@ -233,12 +249,16 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.deleteOne(condition);
-            if (res.deletedCount  == 1) {
-                reslove(true);
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.deleteOne(condition);
+                if (res.deletedCount  == 1) {
+                    reslove(true);
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
@@ -252,15 +272,19 @@ class DB {
         let db = await this.connect();
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
-            let res = await collection.deleteMany(condition);
-            if (res.deletedCount >= 1) {
-                reslove({
-                    ok: true,
-                    n: res.deletedCount
-                });
-            }
-            else{
-                reject(false);
+            try {
+                let res = await collection.deleteMany(condition);
+                if (res.deletedCount >= 1) {
+                    reslove({
+                        ok: true,
+                        n: res.deletedCount
+                    });
+                }
+                else{
+                    reject(false);
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }
