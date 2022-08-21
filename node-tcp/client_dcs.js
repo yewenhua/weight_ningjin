@@ -119,8 +119,8 @@ async function reportDcsData(){
     //获取未上报或上报失败的测点数据，每次获取20条
     ids = [];
     let datalist = await MongoDB().findLimit('gas', {
-        $or:[{flag: 'success'},{flag: 'init'}]
-    }, 1, 1);
+        $or:[{flag: 'fail'},{flag: 'init'}]
+    }, 1, 20);
 
     let data = [];
     let itemParam = {};
