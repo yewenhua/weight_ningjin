@@ -6,34 +6,37 @@ import socket
 import json
 import configparser
 import os
+from threading import Thread
+from multiprocessing import cpu_count
+import math
 pywintypes.datetime = pywintypes.TimeType
 
-class gasHelper:
-    # 构造函数
-    def __init__(self):
+class DataThread(Thread):
+    def __init__(self, opcserver, tags):
+        super(DataThread, self).__init__()
+        self.opcserver = opcserver
+        self.tags = tags
         self.opc = None
-        self.opcserver = None
-        self.tags = []
-        self.group = None
-        self.cf = self.load_ini()
+        self.values = None
 
+    def run(self):
         if self.conn():
-            self.read_by_group()
+            self.values = self.getData()
 
-    #连接
+    #返回获得值
+    def get_values(self):
+        try:
+            return self.values
+        except Exception:
+            return None
+
+    #连接opc
     def conn(self):
         flag = False
         try:
             #连接OPC  创建实例
-            # DCOM mode is used to talk directly to OPC servers without the need for the OpenOPC Gateway Service.
-            # This mode is only available to Windows clients
             self.opc = OpenOPC.client()  # DCOM mode
-            #print('OPC 服务器列表')
-            #print(self.opc.servers())
-            #['CoDeSys.OPC.DA', 'Intellution.OPCiFIX.1', 'ABB.AC800MC_OpcDaServer.3', 'Intellution.IntellutionGatewayOPCServer', 'Intellution.iFixOPCClient', 'CoDeSys.OPC.02', 'Intellution.OPCEDA.3', 'Proficy.Historian.HDA']
-            self.opcserver = self.get_value('opcserver')
             self.opc.connect(self.opcserver)
-            #self.get_tags()
             return True
         except Exception as e:
             print('异常退出')
@@ -41,23 +44,12 @@ class gasHelper:
             flag = False
         finally:
             print('finally')
-
         return flag
 
-    #获取tag列表
-    def get_tags(self):
-        print('=======所有变量=======\n')
-        #print(self.opc.list()) #所有变量
-        #print(self.opc.list('Applications.BurningLine1'))
-        #print(self.cf.items('TAGS'))
-
-    # 按组读取
-    def read_by_group(self):
+    #读取opc数据
+    def getData(self):
         values = []
-        items = self.cf.items('TAGS')
-        #tags = []
-        for item in items:
-            #tags.append(item[1])
+        for item in self.tags:
             tag = item[1]
             loop = True
             num = 0;  #最多执行5次
@@ -66,7 +58,7 @@ class gasHelper:
                     tag_tuple = (tag,)
                     read_value_tuple = self.opc.read(tag)
                     print('读取结果')
-                    print(read_value_tuple)
+                    #print(read_value_tuple)
                     merge_tuple = tag_tuple + read_value_tuple #元祖合并
                     values.append(merge_tuple)
                     print(merge_tuple)
@@ -79,10 +71,60 @@ class gasHelper:
                     print('finally')
                 if loop:
                     time.sleep(8)
+        self.opc.close()
+        return values
+
+class gasHelper:
+    # 构造函数
+    def __init__(self):
+        self.cf = self.load_ini()
+        self.read_by_thread()
+
+    # 按组读取
+    def read_by_thread(self):
+        cpu_core_num = multiprocessing.cpu_count()
+        opcserver_big = self.get_value('opcserver_big')      #800系统
+        opcserver_small = self.get_value('opcserver_small')  #500系统
+        bigtags = self.cf.items('BIGTAGS')      #800系统点位
+        smalltags = self.cf.items('SMALLTAGS')  #500系统点位
+
+        th_list = []  #现场列表
+        values = []   #最终返回值
+        #800系统点位子线程，创建cpu核数相同数量的子线程
+        big_item_len = math.floor(len(bigtags)/cpu_core_num)
+        for i in range(cpu_core_num):
+            start = i*big_item_len
+            if (i == cpu_core_num-1):
+                end = len(bigtags) - 1
+            else:
+                end = (i+1)*big_item_len
+            th_list.append(DataThread(opcserver_big, bigtags[start:end]))
+
+        #500系统点位子线程，创建cpu核数相同数量的子线程
+        small_item_len = math.floor(len(smalltags)/cpu_core_num)
+        for i in range(cpu_core_num):
+            start = i*small_item_len
+            if (i == cpu_core_num-1):
+                end = len(smalltags) - 1
+            else:
+                end = (i+1)*small_item_len
+            th_list.append(DataThread(opcserver_small, smalltags[start:end]))
+
+        #执行子线程
+        for th in th_list:
+            th.start()
+
+        #等待子线程结束
+        for th in th_list:
+            th.join()
+
+        #合并各子线程获得的数据
+        for th in th_list:
+            val = th.get_values()
+            values.extend(val)
 
         #udp发送数据到网闸外
         self.udp_to_server(values)
-        self.opc.close()
 
     #将数据通过udp协议传输到网闸外的udp server
     def udp_to_server(self, values):
