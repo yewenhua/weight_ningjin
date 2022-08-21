@@ -485,6 +485,26 @@ module.exports = appInfo => {
             'cnName': '2#低温过热器入口烟气温度（右侧）',  //测点中文名
         },
         {
+            'itemCode': 'DWGRQ_RKFY_L',  //测点在管控平台的CODE
+            'sourceCode': 'Applications.BurningLine1.PI_023L',  //测点在源系统的code
+            'cnName': '1#低温过热器入口负压（左侧）',  //测点中文名
+        },
+        {
+            'itemCode': 'DWGRQ_RKFY_L',  //测点在管控平台的CODE
+            'sourceCode': 'Applications.BurningLine2.PI_023L',  //测点在源系统的code
+            'cnName': '2#低温过热器入口负压（左侧）',  //测点中文名
+        },
+        {
+            'itemCode': 'DWGRQ_RKFY_R',  //测点在管控平台的CODE
+            'sourceCode': 'Applications.BurningLine1.PI_023R',  //测点在源系统的code
+            'cnName': '1#低温过热器入口负压（右侧）',  //测点中文名
+        },
+        {
+            'itemCode': 'DWGRQ_RKFY_R',  //测点在管控平台的CODE
+            'sourceCode': 'Applications.BurningLine2.PI_023R',  //测点在源系统的code
+            'cnName': '2#低温过热器入口负压（右侧）',  //测点中文名
+        },
+        {
             'itemCode': 'YJSMQ_RKYQWD_L',  //测点在管控平台的CODE
             'sourceCode': 'Applications.BurningLine1.TR_024L',  //测点在源系统的code
             'cnName': '1#一级省煤器入口烟气温度（左侧）',  //测点中文名
