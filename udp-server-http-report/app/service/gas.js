@@ -28,6 +28,7 @@ class GasService extends Service {
                 }
                 let time = (new Date(item[3])).getTime();
                 let tagCnName, code;
+                //循环获取中文名和编码
                 for(let tagItem of cfg_tags){
                     if(tag == tagItem.sourceCode){
                         tagCnName = tagItem.cnName;
