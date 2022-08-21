@@ -155,7 +155,6 @@ async function reportDcsData(){
             msgContent: msgContent
         };
 
-        console.log('0000000000000');
         await sendData(params);
     }
 }
