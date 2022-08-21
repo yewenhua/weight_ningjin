@@ -67,6 +67,7 @@ class gasHelper:
                     print(read_value_tuple)
                     merge_tuple = tag_tuple + read_value_tuple #元祖合并
                     values.append(merge_tuple)
+                    print(merge_tuple)
                     loop = False
                 except Exception as e:
                     print('异常退出')

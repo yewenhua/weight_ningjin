@@ -28,51 +28,39 @@ class GasService extends Service {
                 let time = (new Date(item[3])).getTime();
                 let tagCnName;
                 if(tag.indexOf('TRA_017') !== -1 || tag.indexOf('TRA_116C') !== -1 || tag.indexOf('TRA_216C') !== -1){
-                    deviceFactorCode = 'realTimeTemp'; //实时温度
                     tagCnName = '实时温度';
                 }
                 else if(tag.indexOf('FS_FLOW') !== -1){
-                    deviceFactorCode = 'leachate'; //渗沥液
                     tagCnName = '渗沥液';
                 }
                 else if(tag.indexOf('FS_NH3_N') !== -1){
-                    deviceFactorCode = 'ammoniaNitrogen'; //氨氮
                     tagCnName = '氨氮';
                 }
                 else if(tag.indexOf('FS_PH') !== -1){
-                    deviceFactorCode = 'phValue'; //ph值
                     tagCnName = 'ph值';
                 }
                 else if(tag.indexOf('FS_COD') !== -1){
-                    deviceFactorCode = 'cod'; //COD
                     tagCnName = 'COD';
                 }
                 else if(tag.indexOf('DUST') !== -1){
-                    deviceFactorCode = 'particulateMatter'; //颗粒物
                     tagCnName = '颗粒物';
                 }
                 else if(tag.indexOf('SO2') !== -1){
-                    deviceFactorCode = 'sulfurDioxide'; //二氧化硫
                     tagCnName = '二氧化硫';
                 }
                 else if(tag.indexOf('NOX') !== -1){
-                    deviceFactorCode = 'nitrogenOxide'; //氮氧化物
                     tagCnName = '氮氧化物';
                 }
                 else if(tag.indexOf('HCL') !== -1){
-                    deviceFactorCode = 'hydrogenChloride'; //氯化氢
                     tagCnName = '氯化氢';
                 }
                 else if(tag.indexOf('CO') !== -1){
-                    deviceFactorCode = 'carbonMonoxide'; //一氧化碳
                     tagCnName = '一氧化碳';
                 }
                 else if(tag.indexOf('noise') !== -1){
-                    deviceFactorCode = 'noise'; //噪音
                     tagCnName = '噪音';
                 }
                 else if(tag.indexOf('dioxin') !== -1){
-                    deviceFactorCode = 'dioxin'; //二恶英
                     tagCnName = '二恶英';
                 }
                 else{
