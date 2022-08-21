@@ -70,7 +70,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -89,7 +89,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -119,7 +119,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -137,7 +137,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -160,7 +160,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -186,7 +186,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -210,7 +210,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -237,7 +237,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -260,7 +260,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
     /**
@@ -286,7 +286,7 @@ class DB {
             } catch (error) {
                 reject(error);
             }
-        });
+        }).catch(()=>{});
     }
 
 }
