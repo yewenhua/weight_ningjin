@@ -120,7 +120,7 @@ async function reportDcsData(){
     ids = [];
     let datalist = await MongoDB().findLimit('gas', {
         $or:[{flag: 'success'},{flag: 'init'}]
-    }, 1, 20);
+    }, 1, 1);
 
     let data = [];
     let itemParam = {};
@@ -139,6 +139,8 @@ async function reportDcsData(){
     }
 
     if(data.length > 0){
+        console.log('AAAAAAAAAAAAAAAAAAA');
+        console.log(data);
         let msgContent = JSON.stringify({
             secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
             data: Utils.aes_encode2(aes_key, JSON.stringify(data))  //使用本地AES秘钥加密数据
@@ -153,6 +155,7 @@ async function reportDcsData(){
             msgContent: msgContent
         };
 
+        console.log('0000000000000');
         await sendData(params);
     }
 }

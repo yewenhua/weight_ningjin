@@ -213,6 +213,8 @@ class DB {
         const collection = db.collection(tableName);
         return new Promise(async (reslove, reject) => {
             let res = await collection.updateMany(condition, { $set: data });
+            console.log('1111111111111111');
+            console.log(res);
             if (res.result.ok == 1) {
                 reslove({
                     ok: true,

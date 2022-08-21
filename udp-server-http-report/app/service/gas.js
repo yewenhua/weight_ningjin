@@ -208,23 +208,6 @@ class GasService extends Service {
         return res;
     }
 
-    async findYesterdayList() {
-        const { ctx } = this;
-        const beginTimestamp = (new Date()).getTime() - 48 * 60 * 60 * 1000 + 8 * 60 * 60 * 1000;
-        const endTimestamp = (new Date()).getTime() - 24 * 60 * 60 * 1000 + 8 * 60 * 60 * 1000;
-        const rows = await ctx.model.Gas
-        .find({
-            acquisitionDatetime: {
-                $gte: (new Date()).setTime(beginTimestamp),
-                $lt: (new Date()).setTime(endTimestamp)
-            },
-            deletetime: null
-        })
-        .exec();
-
-        return rows;
-    }
-
     async deleteByIds(ids) {
         const { ctx } = this;
         let res = await ctx.model.Gas.updateMany({
@@ -235,44 +218,6 @@ class GasService extends Service {
             deletetime: new Date()
         });
         return res;
-    }
-
-    async findInIds(ids) {
-        const { ctx } = this;
-        const rows = await ctx.model.Gas
-        .find({
-            _id: {
-                $in: ids
-            }
-        })
-        .exec();
-
-        return rows;
-    }
-
-    async findByID(id) {
-        const { ctx } = this;
-        const row = await ctx.model.Gas
-        .findOne({
-            _id: id
-        })
-        .exec();
-
-        return row;
-    }
-
-    async findByRange(start, end) {
-        const { ctx } = this;
-        const rows = await ctx.model.Gas
-        .find({
-            acquisitionDatetime: {
-                $gte: new Date(start),
-                $lt: new Date(end)
-            },
-        })
-        .exec();
-
-        return rows;
     }
 
     async findMonthBefore() {
