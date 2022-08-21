@@ -82,7 +82,7 @@ class gasHelper:
 
     # 按组读取
     def read_by_thread(self):
-        cpu_core_num = multiprocessing.cpu_count()
+        cpu_core_num = cpu_count()
         opcserver_big = self.get_value('opcserver_big')      #800系统
         opcserver_small = self.get_value('opcserver_small')  #500系统
         bigtags = self.cf.items('BIGTAGS')      #800系统点位
@@ -92,10 +92,11 @@ class gasHelper:
         values = []   #最终返回值
         #800系统点位子线程，创建cpu核数相同数量的子线程
         big_item_len = math.floor(len(bigtags)/cpu_core_num)
+
         for i in range(cpu_core_num):
             start = i*big_item_len
             if (i == cpu_core_num-1):
-                end = len(bigtags) - 1
+                end = len(bigtags)
             else:
                 end = (i+1)*big_item_len
             th_list.append(DataThread(opcserver_big, bigtags[start:end]))
@@ -105,7 +106,7 @@ class gasHelper:
         for i in range(cpu_core_num):
             start = i*small_item_len
             if (i == cpu_core_num-1):
-                end = len(smalltags) - 1
+                end = len(smalltags)
             else:
                 end = (i+1)*small_item_len
             th_list.append(DataThread(opcserver_small, smalltags[start:end]))
