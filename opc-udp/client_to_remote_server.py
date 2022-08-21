@@ -34,13 +34,14 @@ class gasHelper:
             self.opcserver = self.get_value('opcserver')
             self.opc.connect(self.opcserver)
             #self.get_tags()
-            #return False
+            return True
         except Exception as e:
             print('异常退出')
             print(str(e))
             flag = False
         finally:
-            flag = True
+            print('finally')
+
         return flag
 
     #获取tag列表
@@ -59,7 +60,8 @@ class gasHelper:
             #tags.append(item[1])
             tag = item[1]
             loop = True
-            while loop:
+            num = 0;  #最多执行5次
+            while loop and num < 5:
                 try:
                     tag_tuple = (tag,)
                     read_value_tuple = self.opc.read(tag)
@@ -72,6 +74,7 @@ class gasHelper:
                 except Exception as e:
                     print('异常退出')
                     print(str(e))
+                    num = num + 1
                 finally:
                     print('finally')
                 if loop:
