@@ -122,10 +122,6 @@ async function reportDcsData(){
         flag: { $in: ['fail', 'init'] }
     }, 1, 20);
 
-    console.log('BBBBBBBBBBBBBBBB');
-    console.log(datalist);
-    return false;
-
     let data = [];
     let itemParam = {};
 

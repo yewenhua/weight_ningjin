@@ -111,18 +111,15 @@ class DB {
                     .limit(limit)
                     .toArray((err, docs) => {
                         if (err) {
-                            console.log('66666666666666');
                             reject(err);
                         } else {
-                            console.log('77777777777');
                             reslove(docs);
                         }
                     });
             } catch (error) {
-                console.log('88888888888888');
                 reject(error);
             }
-        }).catch(()=>{console.log('999999999999');});
+        }).catch(()=>{});
     }
 
     /**
