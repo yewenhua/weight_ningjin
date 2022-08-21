@@ -30,7 +30,6 @@ class GasService extends Service {
                 let tagCnName, code;
                 for(let tagItem of cfg_tags){
                     if(tag == tagItem.sourceCode){
-                        console.log('3333333333333');
                         tagCnName = tagItem.cnName;
                         code = tagItem.itemCode;
                         break;

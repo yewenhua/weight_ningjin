@@ -20,7 +20,6 @@ module.exports = app => {
         },
         code: {
             type: String,
-            required: [ true, '测点在管控平台的CODE是必须的' ]
         },
         result: {
             type: String //上报返回结果
