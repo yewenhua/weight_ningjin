@@ -10,11 +10,12 @@ class GasService extends Service {
     }
 
     async insertMany(params){
+        const { ctx, app } = this;
         let data = [];
-        console.log('00000000000000000');
-        console.log(params);
+        console.log('=====插入DCS数据======');
         //return false;
         if(params && params.length > 0){
+            let cfg_tags = app.config.dcsTags;
             for(let item of params){
                 let tag = item[0];
                 let value = String(item[1]);
@@ -26,52 +27,21 @@ class GasService extends Service {
                     value = value.toFixed(4);
                 }
                 let time = (new Date(item[3])).getTime();
-                let tagCnName;
-                if(tag.indexOf('TRA_017') !== -1 || tag.indexOf('TRA_116C') !== -1 || tag.indexOf('TRA_216C') !== -1){
-                    tagCnName = '实时温度';
+                let tagCnName, code;
+                for(let tagItem of cfg_tags){
+                    if(tag == tagItem.sourceCode){
+                        tagCnName = tagItem.cnName;
+                        code = tagItem.itemCode;
+                    }
                 }
-                else if(tag.indexOf('FS_FLOW') !== -1){
-                    tagCnName = '渗沥液';
-                }
-                else if(tag.indexOf('FS_NH3_N') !== -1){
-                    tagCnName = '氨氮';
-                }
-                else if(tag.indexOf('FS_PH') !== -1){
-                    tagCnName = 'ph值';
-                }
-                else if(tag.indexOf('FS_COD') !== -1){
-                    tagCnName = 'COD';
-                }
-                else if(tag.indexOf('DUST') !== -1){
-                    tagCnName = '颗粒物';
-                }
-                else if(tag.indexOf('SO2') !== -1){
-                    tagCnName = '二氧化硫';
-                }
-                else if(tag.indexOf('NOX') !== -1){
-                    tagCnName = '氮氧化物';
-                }
-                else if(tag.indexOf('HCL') !== -1){
-                    tagCnName = '氯化氢';
-                }
-                else if(tag.indexOf('CO') !== -1){
-                    tagCnName = '一氧化碳';
-                }
-                else if(tag.indexOf('noise') !== -1){
-                    tagCnName = '噪音';
-                }
-                else if(tag.indexOf('dioxin') !== -1){
-                    tagCnName = '二恶英';
-                }
-                else{
-                    tagCnName = '炉膛上部温度';
-                }
+
 
                 data.push({
                     tag: tag,
                     value: value,
                     datetime: time,
-                    cn_name: tagCnName
+                    cn_name: tagCnName,
+                    code: code
                 });
             }
         }
@@ -91,8 +61,6 @@ class GasService extends Service {
             }
         }
 
-        //console.log('111111111111111111');
-        //console.log(final_params);
         if(final_params.length > 0){
             return await this.ctx.model.Gas.insertMany(final_params);
         }

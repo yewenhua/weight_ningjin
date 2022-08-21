@@ -139,8 +139,8 @@ async function reportDcsData(){
     }
 
     if(data.length > 0){
-        console.log('AAAAAAAAAAAAAAAAAAA');
-        console.log(data);
+        console.log('=====数据开始上报=====');
+        //console.log(data);
         let msgContent = JSON.stringify({
             secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
             data: Utils.aes_encode2(aes_key, JSON.stringify(data))  //使用本地AES秘钥加密数据

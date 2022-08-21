@@ -153,7 +153,7 @@ module.exports = appInfo => {
         dir: path.join(__dirname, '../logs/eggjs')
     };
 
-    config.dcs = [
+    config.dcsTags = [
         {
             'itemCode': 'GL_LTSBWDT10',  //测点在管控平台的CODE
             'sourceCode': 'Applications.BurningLine1.TRA_018L',  //测点在源系统的code
@@ -604,7 +604,7 @@ module.exports = appInfo => {
             'sourceCode': 'Applications.BurningLine2.PDI_053',  //测点在源系统的code
             'cnName': '2#布袋除尘器压差',  //测点中文名
         },
-        
+
     ];
 
     return {
