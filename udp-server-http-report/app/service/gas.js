@@ -16,8 +16,6 @@ class GasService extends Service {
         //return false;
         if(params && params.length > 0){
             let cfg_tags = app.config.dcsTags;
-            console.log('111111111111111');
-            console.log(cfg_tags);
             for(let item of params){
                 let tag = item[0];
                 let value = String(item[1]);
@@ -31,14 +29,11 @@ class GasService extends Service {
                 let time = (new Date(item[3])).getTime();
                 let tagCnName, code;
                 for(let tagItem of cfg_tags){
-                    console.log('2222222222222222');
-                    console.log(tag);
-                    console.log(tagItem.sourceCode);
-
                     if(tag == tagItem.sourceCode){
                         console.log('3333333333333');
                         tagCnName = tagItem.cnName;
                         code = tagItem.itemCode;
+                        break;
                     }
                 }
 
