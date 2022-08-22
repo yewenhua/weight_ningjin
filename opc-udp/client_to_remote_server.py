@@ -49,6 +49,8 @@ class DataThread(Thread):
     #读取opc数据
     def getData(self):
         values = []
+        time_start = time.time()
+        success = 0
         for item in self.tags:
             tag = item[1]
             loop = True
@@ -57,19 +59,23 @@ class DataThread(Thread):
                 try:
                     tag_tuple = (tag,)
                     read_value_tuple = self.opc.read(tag)
-                    #print('读取结果')
+                    print('总条数' + str(len(self.tags)) + '，读取成功' + str(success + 1) + '次')
                     #print(read_value_tuple)
                     merge_tuple = tag_tuple + read_value_tuple #元祖合并
                     values.append(merge_tuple)
                     #print(merge_tuple)
                     loop = False
+                    success = success + 1
                 except Exception as e:
                     print('异常退出')
                     print(str(e))
                     num = num + 1
                 finally:
-                    author = 'cat'
                     #print('finally')
+                    time_end = time.time()
+                    diff = time_end - time_start
+                    if diff > 60:
+                        loop = False
                 if loop:
                     time.sleep(8)
         self.opc.close()
