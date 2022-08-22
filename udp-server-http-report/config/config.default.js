@@ -624,6 +624,26 @@ module.exports = appInfo => {
             'sourceCode': 'Applications.BurningLine2.PDI_053',  //测点在源系统的code
             'cnName': '2#布袋除尘器压差',  //测点中文名
         },
+        {
+            'itemCode': 'GL_SHJLL',  //测点在管控平台的CODE
+            'sourceCode': 'WHQ1.0FI_001_AI',  //测点在源系统的code
+            'cnName': '1#石灰浆流量',  //测点中文名
+        },
+        {
+            'itemCode': 'GL_SHJLL',  //测点在管控平台的CODE
+            'sourceCode': 'WHQ2.0FI_001_AI',  //测点在源系统的code
+            'cnName': '2#石灰浆流量',  //测点中文名
+        },
+        {
+            'itemCode': 'GL_WHQZS',  //测点在管控平台的CODE
+            'sourceCode': 'WHQ1.0WHDJ_CS1_AI',  //测点在源系统的code
+            'cnName': '1#雾化器转速',  //测点中文名
+        },
+        {
+            'itemCode': 'GL_WHQZS',  //测点在管控平台的CODE
+            'sourceCode': 'WHQ2.0WHDJ_CS1_AI',  //测点在源系统的code
+            'cnName': '2#雾化器转速',  //测点中文名
+        },
 
     ];
 
