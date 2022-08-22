@@ -43,7 +43,7 @@ class DataThread(Thread):
             print(str(e))
             flag = False
         finally:
-            print('finally')
+            print('conn finally')
         return flag
 
     #读取opc数据
@@ -57,18 +57,19 @@ class DataThread(Thread):
                 try:
                     tag_tuple = (tag,)
                     read_value_tuple = self.opc.read(tag)
-                    print('读取结果')
+                    #print('读取结果')
                     #print(read_value_tuple)
                     merge_tuple = tag_tuple + read_value_tuple #元祖合并
                     values.append(merge_tuple)
-                    print(merge_tuple)
+                    #print(merge_tuple)
                     loop = False
                 except Exception as e:
                     print('异常退出')
                     print(str(e))
                     num = num + 1
                 finally:
-                    print('finally')
+                    author = 'cat'
+                    #print('finally')
                 if loop:
                     time.sleep(8)
         self.opc.close()
@@ -101,15 +102,8 @@ class gasHelper:
                 end = (i+1)*big_item_len
             th_list.append(DataThread(opcserver_big, bigtags[start:end]))
 
-        #500系统点位子线程，创建cpu核数相同数量的子线程
-        small_item_len = math.floor(len(smalltags)/cpu_core_num)
-        for i in range(cpu_core_num):
-            start = i*small_item_len
-            if (i == cpu_core_num-1):
-                end = len(smalltags)
-            else:
-                end = (i+1)*small_item_len
-            th_list.append(DataThread(opcserver_small, smalltags[start:end]))
+        #500系统点位子线程
+        th_list.append(DataThread(opcserver_small, smalltags))
 
         #执行子线程
         for th in th_list:
