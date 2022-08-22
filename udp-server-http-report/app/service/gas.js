@@ -20,7 +20,7 @@ class GasService extends Service {
                 let tag = item[0];
                 let value = String(item[1]);
                 if(value == 'None' || value == 'none' || value == '' || value == 'null' || !value){
-                    continue;
+                    //continue;
                 }
                 if(value.indexOf('.') !== -1){
                     value = Number(item[1]);
