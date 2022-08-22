@@ -1688,7 +1688,7 @@ module.exports = appInfo => {
             'itemCode': 'GL_SNCRHYJPSBCKYL',  //测点在管控平台的CODE
             'sourceCode': 'SNCR..PI_001_AI',  //测点在源系统的code
             'cnName': '1#炉SNCR还原剂喷射泵出口压力',  //测点中文名
-        },
+        }
     ];
 
     return {
