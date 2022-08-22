@@ -74,7 +74,7 @@ class DataThread(Thread):
                     #print('finally')
                     time_end = time.time()
                     diff = time_end - time_start
-                    if diff > 60:
+                    if diff > 120:
                         loop = False
                 if loop:
                     time.sleep(8)
