@@ -220,7 +220,6 @@ class GasController extends Controller {
 
     //删除数据
     async remove() {
-        return false;
         const { app, ctx, service } = this;
         let rows = await service.gas.findMonthBefore();
         if(rows && rows.length > 0){

@@ -179,7 +179,7 @@ class GasService extends Service {
 
     async findMonthBefore() {
         const { ctx } = this;
-        const endTimestamp = (new Date()).getTime() - 30 * 24 * 60 * 60 * 1000;
+        const endTimestamp = (new Date()).getTime() - 7 * 24 * 60 * 60 * 1000;
         const rows = await ctx.model.Gas
         .find({
             acquisitionDatetime: {
