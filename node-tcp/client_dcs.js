@@ -81,7 +81,7 @@ async function receiveData(msg){
                 public_key = '-----BEGIN PUBLIC KEY-----\n' + msgContent.data  + '\n-----END PUBLIC KEY-----';
                 while(true){
                     await reportDcsData();
-                    await Utils.wait(60 * 1000);
+                    await Utils.wait(10 * 1000);
                 }
                 break;
             case 2:
@@ -120,7 +120,7 @@ async function reportDcsData(){
     ids = [];
     let datalist = await MongoDB().findLimit('gas', {
         flag: { $in: ['fail', 'init'] }
-    }, 1, 20);
+    }, 1, 50);
 
     let data = [];
     let itemParam = {};
