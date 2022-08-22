@@ -52,7 +52,7 @@ class DataThread(Thread):
         for item in self.tags:
             tag = item[1]
             loop = True
-            num = 0;  #最多执行5次
+            num = 0  #最多执行5次
             while loop and num < 5:
                 try:
                     tag_tuple = (tag,)
