@@ -126,6 +126,7 @@ class gasHelper:
 
         #udp发送数据到网闸外
         self.udp_to_server(values)
+        os._exit(0)
 
     #将数据通过udp协议传输到网闸外的udp server
     def udp_to_server(self, values):
