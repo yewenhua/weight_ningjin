@@ -2,6 +2,7 @@ module.exports = {
   apps : [{
     name: 'TCP',
     script: './client_dcs.js',
+    //script: './client_garbage.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: '',
