@@ -14,7 +14,7 @@ class Report extends Subscription {
         let { ctx } = this;
         let host = "http://127.0.0.1:7001";
         let version = ctx.app.config.version;
-        let url = host + `/${version}/api/gas/report`;
+        let url = host + `/${version}/api/city/report`;
         await ctx.curl(url, {
             contentType: 'json',
         });

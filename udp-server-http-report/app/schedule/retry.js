@@ -14,7 +14,7 @@ class Retry extends Subscription {
         let { ctx } = this;
         let host = "http://127.0.0.1:7001";
         let version = ctx.app.config.version;
-        let url = host + `/${version}/api/gas/retry`;
+        let url = host + `/${version}/api/city/retry`;
         await ctx.curl(url, {
             contentType: 'json',
         });

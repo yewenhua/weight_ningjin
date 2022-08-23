@@ -25,7 +25,7 @@ module.exports = app => {
         //非用户请求的场景下 创建一个匿名 Context 实例
         const ctx = app.createAnonymousContext();
         ctx.runInBackground(async () => {
-            await ctx.service.gas.insertMany(params);
+            await ctx.service.storage.insertMany(params);
         });
     });
 

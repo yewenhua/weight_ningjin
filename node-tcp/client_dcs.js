@@ -118,7 +118,7 @@ async function receiveData(msg){
 async function reportDcsData(){
     //获取未上报或上报失败的测点数据，每次获取20条
     ids = [];
-    let datalist = await MongoDB().findLimit('gas', {
+    let datalist = await MongoDB().findLimit('province_dcs', {
         flag: { $in: ['fail', 'init'] }
     }, 1, 50);
 
@@ -161,7 +161,7 @@ async function reportDcsData(){
 
 //更新上报状态
 async function updateReportStatus(status='success', ids){
-    await MongoDB().updateMany('gas', {
+    await MongoDB().updateMany('province_dcs', {
         _id: { $in: ids }
     }, {
         flag: 'success'

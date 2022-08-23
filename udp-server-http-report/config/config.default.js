@@ -74,16 +74,6 @@ module.exports = appInfo => {
         },
     };
 
-    config.taizhouFenshaoApi = {
-        accessKeyId: 'JJLJFL_LHSSHLJ_2022051306',
-        accessSecret: 'db4f5245f21c2022051306',
-        host: '111.3.67.37:8082',
-        term_id: '1025',
-        systemCode: 'JJLJFL',
-        disposeUnitCode: '1025',
-        weightNo: 'A'
-    };
-
     config.redis = {
         client: {
             host: '127.0.0.1',
@@ -138,8 +128,10 @@ module.exports = appInfo => {
     config.version = 'v1';
 
     config.avs = {
-        host: '',
-        partnerId: ''
+        host: '123.183.193.189',
+        port: '33333',
+        username: 'jwhb',
+        password: 'jwhb@123456'
     };
 
     config.view = {
@@ -153,6 +145,17 @@ module.exports = appInfo => {
         dir: path.join(__dirname, '../logs/eggjs')
     };
 
+    //市平台DCS配置文件
+    config.cityTags = [
+        {
+            "paramId":"aaaaaa",
+            "paramType":"1#炉膛内上部断面前墙温度（T11）",
+            "paramUnit":"t",
+            'tag': 'Applications.BurningLine1.TRA_018M',  //测点在源系统的code
+        },
+    ];
+
+    //省平台DCS配置文件
     config.dcsTags = [
         {
             'itemCode': 'GL_LTSBWDT10',  //测点在管控平台的CODE

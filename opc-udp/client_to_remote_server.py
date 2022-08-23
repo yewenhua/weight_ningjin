@@ -89,7 +89,7 @@ class gasHelper:
 
     # 按组读取
     def read_by_thread(self):
-        cpu_core_num = cpu_count()
+        cpu_core_num = cpu_count() - 1 #800cpu核数-1个opc连接,500启动一个opc连接
         opcserver_big = self.get_value('opcserver_big')      #800系统
         opcserver_small = self.get_value('opcserver_small')  #500系统
         bigtags = self.cf.items('BIGTAGS')      #800系统点位
@@ -98,15 +98,16 @@ class gasHelper:
         th_list = []  #现场列表
         values = []   #最终返回值
         #800系统点位子线程，创建cpu核数相同数量的子线程
-        big_item_len = math.floor(len(bigtags)/cpu_core_num)
+        th_list.append(DataThread(opcserver_big, bigtags))
 
+        big_item_len = math.floor(len(bigtags)/cpu_core_num)
         for i in range(cpu_core_num):
             start = i*big_item_len
             if (i == cpu_core_num-1):
-                end = len(bigtags)
+                th_list.append(DataThread(opcserver_big, bigtags[start:]))
             else:
                 end = (i+1)*big_item_len
-            th_list.append(DataThread(opcserver_big, bigtags[start:end]))
+                th_list.append(DataThread(opcserver_big, bigtags[start:end]))
 
         #500系统点位子线程
         th_list.append(DataThread(opcserver_small, smalltags))
