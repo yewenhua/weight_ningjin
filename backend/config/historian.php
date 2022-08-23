@@ -8,4 +8,5 @@ return [
     'servername' => env('HISTORIAN_SERVER',""),
     'username' => env('HISTORIAN_USERNAME',""),
     'password' => env('HISTORIAN_PASSWORD',""),
+    'prefix' => env('HISTORIAN_PREFIX',""),
 ];

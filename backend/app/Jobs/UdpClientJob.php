@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use HistorianService;
+use Log;
 
 class UdpClientJob implements ShouldQueue
 {
@@ -29,7 +31,8 @@ class UdpClientJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->socket_udp_client($ip='127.0.0.1', $port='8899', $data='hello words');
+        //$this->socket_udp_client($ip='127.0.0.1', $port='8899', $data='hello words');
+        $this->getData();
     }
 
     /**
@@ -49,6 +52,42 @@ class UdpClientJob implements ShouldQueue
     }
 
     private function getData(){
+        $prefix = config('historian.prefix');
+        $tags = config('udp');
+        $tagsNameString = '';
+        $datalist = array();
+        $i = 0;
+        $num = 20;
+        $tag_str_arr = array();
+        foreach ($tags as $key => $tag) {
+            if(!$tagsNameString){
+                $tagsNameString = $tag;
+            }
+            else{
+                $tagsNameString .= ';'.$tag;
+            }
 
+            if($i > 0 && ($i % $num) == 0){
+                $tag_str_arr[] = $tagsNameString;
+                $tagsNameString = '';
+            }
+
+            if($i == (count($tags) - 1) && $tagsNameString){
+                $tag_str_arr[] = $tagsNameString;
+            }
+
+            $i++;
+        }
+
+        foreach ($tag_str_arr as $key => $tag_str) {
+            $res = HistorianService::currentData($tag_str);
+            if ($res['code'] === 0 && $res['data']['ErrorCode'] === 0) {
+                $datas = $res['data']['Data'];
+                $datalist = array_merge($datalist, $datas);
+            }
+        }
+        Log::info('00000000');
+        Log::info(var_export($datalist, true));
+        return $datalist;
     }
 }

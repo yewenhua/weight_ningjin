@@ -78,17 +78,17 @@ class HistorianDataController extends Controller
      *         required=true,
      *         type="string",
      *     ),
-     * @SWG\Parameter(
-     *     description="historian tag ids string，使用','分隔，example: tagIds=1,2,3",
-     *     in="formData",
-     *     name="tagIds",
-     *     required=true,
-     *     type="string",
-     * ),
-     * @SWG\Response(
-     *     response=200,
-     *     description="store succeed",
-     * )
+     *     @SWG\Parameter(
+     *         description="historian tag ids string，使用','分隔，example: tagIds=1,2,3",
+     *         in="formData",
+     *         name="tagIds",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="store succeed",
+     *     )
      * )
      */
     public function currentData(Request $request)
