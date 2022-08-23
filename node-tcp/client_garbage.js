@@ -119,34 +119,33 @@ async function reportGarbageData(){
     ids = [];
     let datalist;
     let data = [];
-    let itemParam = {};
-    let latest_report = await mssql_async('SELECT * FROM Weight ORDER BY secondWeightTime DESC');
-    if(latest_report && latest_report.length > 0){
+    let latest_report = await mssql_async('SELECT top 1* FROM Weight ORDER BY secondWeightTime DESC');
+    if(latest_report && latest_report.recordset.length > 0){
         //从上一次上报的数据的下一条开始继续上报
-        let sql = 'SELECT * FROM Trade WHERE seconddatetime > ' + latest_report[0]['secondWeightTime'] + 'AND datastatus != 9 ORDER BY seconddatetime ASC';
+        let sql = "SELECT top 5 id,truckno,cardno,product,sender,receiver,firstdatetime,seconddatetime,firstweight,secondweight,gross,tare,net,datastatus FROM Trade WHERE seconddatetime > '" + latest_report.recordset[0]['secondWeightTime'] + "' AND datastatus != 9 ORDER BY seconddatetime ASC";
         datalist = await mssql_async(sql);
     }
     else{
         //未曾上报过数据
-        datalist = await mssql_async('SELECT * FROM Trade WHERE id > 5000 and datastatus != 9');
+        datalist = await mssql_async('SELECT top 5 id,truckno,cardno,product,sender,receiver,firstdatetime,seconddatetime,firstweight,secondweight,gross,tare,net,datastatus FROM Trade WHERE id > 46700 and datastatus != 9');
     }
 
     //第一次上报的数据
-    for(let item of datalist){
+    for(let item of datalist.recordset){
         if(!item.gross || !item.tare){
             continue;
         }
 
-        itemParam =
+        let itemParam =
         {
             "lsh": item.id,  //流水号
             "carNo": item.truckno,
-            "cardNo": item.cardNo, //ic卡号
+            "cardNo": item.cardno, //ic卡号
             "proCode": 1,     //1：生活垃圾；2：飞灰；3：炉渣；4：渗滤液；5：活性炭；6：消石灰；7：螯合剂；8：水泥；9：氨水；10：盐酸
             //"originalSourceArea": item.sender,  //地磅系统中的货物来源
             //"transportUnit": item.transporter,       //运输单位
-            "firstWeightTime": new Date(item.firstdatetime),     //进厂时间，精确到时分秒
-            "secondWeightTime": new Date(item.seconddatetime),    //出厂时间，精确到时分秒
+            "firstWeightTime": Utils.formatTime(new Date(item.firstdatetime).getTime()),     //进厂时间，精确到时分秒
+            "secondWeightTime": Utils.formatTime(new Date(item.seconddatetime).getTime()),    //出厂时间，精确到时分秒
             "gross": item.gross,  //毛重，单位：kg
             "tare": item.tare,   //皮重，单位：kg
             "net": item.net,    //净重，单位：kg
@@ -161,23 +160,24 @@ async function reportGarbageData(){
 
     //插入上报数据记录
     if(data.length > 0){
-        let insertSql = 'INSERT INTO Weight ( `lsh`, `carNo`, `cardNo`, `proCode`, `firstWeightTime`, `secondWeightTime`, `gross`, `tare`, `net`, `dataStatus`, `statDateNum` ) VALUES ';
+        let insertSql = "INSERT INTO Weight (lsh, carNo, cardNo, proCode, firstWeightTime, secondWeightTime, gross, tare, net, dataStatus, statDateNum) VALUES ";
         let i = 0;
         for(let item of data){
-            if(i!=0){
+            insertSql += `( ${item.lsh}, '${item.carNo}', '${item.cardNo}', ${item.proCode}, '${item.firstWeightTime}', '${item.secondWeightTime}', ${item.gross}, ${item.tare}, ${item.net}, ${item.dataStatus}, ${item.statDateNum})`;
+            if(i != data.length-1){
                 insertSql += ',';
             }
-            insertSql += '(' + item.id + item.truckno + item.cardNo + item.proCode + item.firstWeightTime + item.secondWeightTime + item.gross + item.tare + item.net + item.dataStatus + item.statDateNum + ')';
             i++;
         }
+
         await mssql_async(insertSql);
     }
 
     //上报失败的数据重新上报
     let fail_sql = "SELECT * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
     let fail_report = await mssql_async(fail_sql);
-    for(let item of fail_report){
-        itemParam =
+    for(let item of fail_report.recordset){
+        let itemParam =
         {
             "lsh": item.lsh,  //流水号
             "carNo": item.carNo,
@@ -222,6 +222,6 @@ async function reportGarbageData(){
 //更新上报状态
 async function updateReportStatus(status='success', id_arr){
     let ids = id_arr.join();
-    let sql = 'UPDATE Weight SET flag = ' + status + ' WHERE id IN ' + '(' + ids + ')';
+    let sql = "UPDATE Weight SET flag = '" + status + "' WHERE lsh IN " + "(" + ids + ")";
     await mssql_async(sql);
 }

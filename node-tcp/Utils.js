@@ -2,6 +2,7 @@ const CryptoJS = require("crypto-js");
 const JSEncrypt = require('node-jsencrypt')
 const crypto = require('crypto')
 const NodeRSA = require('node-rsa');
+const moment = require('moment');
 
 exports.aes_encode = (key, plainText)=>{
     let newkey = CryptoJS.enc.Utf8.parse(key); //密钥必须是16位，且避免使用保留字符
@@ -81,5 +82,6 @@ exports.wait = async (ms) => {
     return new Promise(resolve => setTimeout(() => resolve(), ms));
 };
 
-exports.formatDateNumber = time => moment(time)
-    .format('YYYYMMDD');
+exports.formatDateNumber = time => moment(time).format('YYYYMMDD');
+
+exports.formatTime = time => moment(time).format('YYYY-MM-DD HH:mm:ss');

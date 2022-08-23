@@ -1,12 +1,13 @@
 var sqlserver = require('mssql');
 var dbConfig = {
-    server: '127.0.0.1',
+    server: '192.168.1.165',
     port: 1433,
     user: 'sa',
     password: '123',
     database: 'toledo_aw',
     options: {
-        encrypt: false
+        encrypt: false,
+        useUTC: false
     }
 };
 
