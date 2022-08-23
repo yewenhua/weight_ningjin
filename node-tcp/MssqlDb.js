@@ -1,6 +1,7 @@
 var sqlserver = require('mssql');
 var dbConfig = {
-    server: '192.168.1.165',
+    //server: '192.168.1.165',
+    server: '127.0.0.1',
     port: 1433,
     user: 'sa',
     password: '123',
