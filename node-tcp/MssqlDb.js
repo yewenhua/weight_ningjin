@@ -3,7 +3,7 @@ var dbConfig = {
     server: '127.0.0.1',
     port: 1433,
     user: 'sa',
-    password: '123456',
+    password: '123',
     database: 'toledo_aw'
 };
 
@@ -12,6 +12,7 @@ var mssql_async= function (strsql) {
         sqlserver
             .connect(dbConfig)
             .then(function () {
+                console.log('conn success');
                 new sqlserver.Request()
                     .query(strsql)
                     .then(function (recordset) {
