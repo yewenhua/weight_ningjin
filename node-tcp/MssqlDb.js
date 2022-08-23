@@ -4,7 +4,10 @@ var dbConfig = {
     port: 1433,
     user: 'sa',
     password: '123',
-    database: 'toledo_aw'
+    database: 'toledo_aw',
+    options: {
+        encrypt: false
+    }
 };
 
 var mssql_async= function (strsql) {
