@@ -64,7 +64,7 @@ class CityDcsService extends Service {
             deletetime: null,
             flag: 'init'
         })
-        .limit(20)
+        .limit(2)
         .sort({ createdAt: -1, _id: -1 })
         .exec();
 
