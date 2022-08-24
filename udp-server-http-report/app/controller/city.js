@@ -28,7 +28,7 @@ class CityController extends Controller {
                 if(item.value){
                     data.push({
                         "paramId": item.paramId,
-                        "paramVal": Number(item.value),
+                        "paramVal": Number(item.value) ? Number(item.value) : 0,
                         "paramType": item.paramType,
                         "paramUnit": item.paramUnit,
                         "dataTime": ctx.helper.formatTime(item.datetime)
