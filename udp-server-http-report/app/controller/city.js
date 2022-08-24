@@ -118,6 +118,7 @@ class CityController extends Controller {
                     dataType: 'json',
                     method: 'POST',
                     data: {
+                        enterpriseId: null,
                         listParams: data
                     },
                     headers: header
