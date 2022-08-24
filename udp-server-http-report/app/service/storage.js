@@ -67,7 +67,7 @@ class StorageService extends Service {
 
         //省平台
         if(data_provincce.length > 0){
-            await this.ctx.model.Gas.insertMany(data_provincce);
+            await this.ctx.model.ProvinceDcs.insertMany(data_provincce);
         }
 
         //市平台
