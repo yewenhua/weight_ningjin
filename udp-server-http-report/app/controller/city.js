@@ -16,6 +16,8 @@ class CityController extends Controller {
             let host = app.config.avs.host;
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
             let token = await service.token.get();
+            console.log('===================');
+            console.log(token);
             let header = {
                 "Content-Type": "application/json; charset=utf-8",
                 "Authorization": 'Bearer ' + token
@@ -46,7 +48,7 @@ class CityController extends Controller {
                 };
 
                 ctx.logger.warn('=========99999999999999=========');
-                ctx.logger.warn(data);
+                ctx.logger.warn(options.data);
 
                 const res = await ctx.curl(url, options);
                 ctx.logger.warn('=========report=========');
