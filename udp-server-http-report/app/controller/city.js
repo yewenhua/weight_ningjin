@@ -40,7 +40,9 @@ class CityController extends Controller {
                     dataType: 'json',     //以 JSON 格式处理响应
                     method: 'POST',
                     data: {
-                        listParams: data
+                        params: {
+                            listParams: data
+                        }
                     },
                     contentType: 'json',
                     headers: header
