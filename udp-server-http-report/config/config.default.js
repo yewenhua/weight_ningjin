@@ -128,7 +128,7 @@ module.exports = appInfo => {
     config.version = 'v1';
 
     config.avs = {
-        host: '123.183.193.189',
+        host: 'http://123.183.193.189',
         port: '33333',
         username: 'jwhb',
         password: 'jwhb@123456'

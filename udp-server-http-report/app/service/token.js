@@ -21,10 +21,7 @@ class TokenService extends Service {
             let options = {
                 dataType: 'json',
                 method: 'POST',
-                data: param,
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                }
+                data: param
             };
             const res = await ctx.curl(url, options);
             if(res && res.status == 200 && res.data && res.data.code == 200){

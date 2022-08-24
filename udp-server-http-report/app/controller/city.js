@@ -82,6 +82,7 @@ class CityController extends Controller {
 
     //上报出错时重新上报
     async retry() {
+        return false;
         const { app, ctx, service } = this;
         let nsp = app.io.of('/');
         let lists = await service.citydcs.findFailList();
