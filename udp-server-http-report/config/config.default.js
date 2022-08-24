@@ -148,10 +148,595 @@ module.exports = appInfo => {
     //市平台DCS配置文件
     config.cityTags = [
         {
-            "paramId":"aaaaaa",
-            "paramType":"1#炉膛内上部断面前墙温度（T11）",
-            "paramUnit":"t",
-            'tag': 'Applications.BurningLine1.TRA_018M',  //测点在源系统的code
+            'paramId':'8d22523b-1752-4dfe-a3f7-fd4314e9895f',
+            'paramName':'1#焚烧炉1#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB1_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'5a78134b-fd53-487b-91cc-a8b32f070d91',
+            'paramName':'1#焚烧炉2#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB2_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'96440d1e-c1c2-4743-a86c-278e7d0134ad',
+            'paramName':'1#焚烧炉3#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB3_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'5220c249-ed6f-464f-8d40-fbee2727183e',
+            'paramName':'1#焚烧炉SCR氨水调节阀开度',
+            'paramUnit':'%',
+			'paramType':'治理',
+            'tag':'SCR1..M_AI_003',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'1099ff7f-64c5-4467-93cb-4e40ba20aa42',
+            'paramName':'1#焚烧炉SCR反应器出口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'SCR1..M_TI_004',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'0b967134-4060-495a-8646-b536436f3da0',
+            'paramName':'1#焚烧炉SCR反应器入口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.TR_053',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'3403f72d-4383-43c7-9c87-efdb4566a7d3',
+            'paramName':'1#焚烧炉SNCR氨水流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'SNCR..FI_201_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'7f7b7b0e-4cd5-4d67-bbe8-68d0e90c0c2a',
+            'paramName':'1#焚烧炉SNCR氨水压力',
+            'paramUnit':'mpa',
+			'paramType':'治理',
+            'tag':'SNCR..PI_201_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'38d891e1-a627-47a7-82c3-6a6a2b28aa97',
+            'paramName':'1#焚烧炉SNCR除盐水流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'SNCR..FI_102_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'b815ff57-7b7f-41ad-b674-b0c3a0af6890',
+            'paramName':'1#焚烧炉半干法脱硫进口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.TR_051',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'c81d92e8-a011-4eb1-bebe-4c34d5d8137c',
+            'paramName':'1#焚烧炉半干法脱硫进口烟气压力',
+            'paramUnit':'pa',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.PI_051',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'dc1a8fe0-93d9-4e1a-8471-5639b4268fbc',
+            'paramName':'1#焚烧炉除尘器出口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.TR_053',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'10dcd5bb-e1ed-43a6-a015-ca79b44e52f3',
+            'paramName':'1#焚烧炉除尘器进口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.TRCA_052',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'e0920e25-807b-41ef-8ea6-97e596f6f6af',
+            'paramName':'1#焚烧炉除尘器压差',
+            'paramUnit':'pa',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.PDI_053',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'4a14b02c-6a0c-4f99-8553-917d15c84971',
+            'paramName':'1#焚烧炉点火燃烧器燃料流量',
+            'paramUnit':'kg/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.RY_FI_RSQ01',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'8ba122db-f146-4484-b5a8-8c6bbbc07915',
+            'paramName':'1#焚烧炉二次风机电流',
+            'paramUnit':'A',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.RF_CE1',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'6d1409f4-cdce-4930-8dee-b7d85603bc6d',
+            'paramName':'1#焚烧炉辅助燃烧器燃料流量',
+            'paramUnit':'kg/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.RY_FI_RSQ03',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'f41e6e9d-c6db-4d97-8f1e-caa4262a23c5',
+            'paramName':'1#焚烧炉给水流量',
+            'paramUnit':'t/h',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine1.FRCQ_001COM_RESET',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'fbe63b31-bbee-49ca-b93c-4618042d19f9',
+            'paramName':'1#焚烧炉给水温度',
+            'paramUnit':'°C',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine1.TRA_001',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'e4a8d567-2c42-4872-be5a-8934ee9b8a86',
+            'paramName':'1#焚烧炉给水压力',
+            'paramUnit':'mpa',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine1.PRA_001',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'3a5757f7-23e0-4b26-8741-d62bc7d48bd7',
+            'paramName':'1#焚烧炉活性炭流量',
+            'paramUnit':'kg/h',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.HXT01_SJLL',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'a79925d9-f81b-491a-a037-c19a6fb47aae',
+            'paramName':'1#焚烧炉炉内干法称重仓重量',
+            'paramUnit':'kg',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF1_SSZL_WI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'c8ac95be-151e-4618-b16b-529e9109d6d7',
+            'paramName':'1#焚烧炉炉内干法粉料累计',
+            'paramUnit':'kg',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF1_SSZL_ACC',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'b1dcbd38-ab8a-49da-bdb7-42887d5aaa0c',
+            'paramName':'1#焚烧炉炉内干法粉料流量',
+            'paramUnit':'kg/h',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF1_Speed_h',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'601cbf5b-3835-43cb-9ebc-6a161e8a2d05',
+            'paramName':'1#焚烧炉炉膛压力',
+            'paramUnit':'pa',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.PRCA_019L',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'75bf9d2f-b34d-4025-8e0c-de5989336a7f',
+            'paramName':'1#焚烧炉雾化器石灰浆液流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'WHQ1..FI_001_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'33cb7f7e-e67a-4043-8e97-589a7fce6f31',
+            'paramName':'1#焚烧炉雾化器转速',
+            'paramUnit':'rpm',
+			'paramType':'治理',
+            'tag':'WHQ1...WHDJ_CS1_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'6ed8da22-943c-48b2-8d1f-b8586601be9c',
+            'paramName':'1#焚烧炉一次风机电流',
+            'paramUnit':'A',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.GF_CE1',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'04b427a3-aed4-4394-af8d-cc4bf9396f02',
+            'paramName':'1#焚烧炉一次风流量',
+            'paramUnit':'m³/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine1.FRQ_007COM_ACC',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'565298aa-00cd-4bfd-8f02-aa116e2ca61e',
+            'paramName':'1#焚烧炉引风机电流',
+            'paramUnit':'A',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.YF_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'d223911d-e4de-452e-8520-722d2dbb8ba7',
+            'paramName':'1#焚烧炉蒸汽流量',
+            'paramUnit':'t/h',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine1.FRCQ_004COM_RESET',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'c606fe00-0207-4103-8d90-0e6a32776416',
+            'paramName':'1#焚烧炉蒸汽温度',
+            'paramUnit':'°C',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine1.TRCA_010',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'0b645267-435c-4bb5-8566-0893284c58e0',
+            'paramName':'1#焚烧炉蒸汽压力',
+            'paramUnit':'mpa',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine1.PRA_010B',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'5bad3706-0f80-451c-8cdb-5d9691ceb19e',
+            'paramName':'1#垃圾抓斗重量',
+            'paramUnit':'t',
+			'paramType':'能耗',
+            'tag':'Applications.CommonParts.WRQ_0101',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'3c33a86d-857e-441b-8cbe-2371bae44b86',
+            'paramName':'2#焚烧炉1#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB1_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'bc11c1af-b3b2-4dca-bf65-4b99d25a1862',
+            'paramName':'2#焚烧炉2#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB2_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'f2f80f38-5677-485c-8039-2bfd437d8bb8',
+            'paramName':'2#焚烧炉3#给水泵电流',
+            'paramUnit':'A',
+			'paramType':'原料',
+            'tag':'Applications.TurbineParts.GB3_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'04ed4c0f-708a-418d-9087-ca57c5f72db3',
+            'paramName':'2#焚烧炉SCR氨水调节阀开度',
+            'paramUnit':'%',
+			'paramType':'治理',
+            'tag':'SCR2..M_AI_003',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'2edcabd8-3e46-48c2-88be-98a445fa9011',
+            'paramName':'2#焚烧炉SCR反应器出口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'SCR2..M_TI_004',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'51b6401d-467e-4b89-9c5b-330c9745ebd3',
+            'paramName':'2#焚烧炉SCR反应器入口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'SCR2..M_TI_003',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'b7803041-a60f-43fa-9641-96dfcd0d8acd',
+            'paramName':'2#焚烧炉SNCR氨水流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'SNCR..FI_201_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'2ad92c1c-baaa-4deb-bb9c-d99c5074b424',
+            'paramName':'2#焚烧炉SNCR氨水压力',
+            'paramUnit':'mpa',
+			'paramType':'治理',
+            'tag':'SNCR..PI_201_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'c46a5a11-2fc0-48b2-9d9d-53e6366067e9',
+            'paramName':'2#焚烧炉SNCR除盐水流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'SNCR..FI_202_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'3dfc8d36-ba12-4a24-9b0b-946f01170903',
+            'paramName':'2#焚烧炉半干法脱硫进口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.TR_051',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'bc04a396-8ef1-4409-a246-6a738dd9dacb',
+            'paramName':'2#焚烧炉半干法脱硫进口烟气压力',
+            'paramUnit':'pa',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.PI_051',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'054f630f-4542-4818-b8ae-d252785d4c55',
+            'paramName':'2#焚烧炉除尘器出口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.TR_053',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'7375b1d8-8308-4216-b326-3c3798b5cf52',
+            'paramName':'2#焚烧炉除尘器进口烟气温度',
+            'paramUnit':'°C',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.TRCA_052',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'45f52439-1aad-4def-8208-0572aab736af',
+            'paramName':'2#焚烧炉除尘器压差',
+            'paramUnit':'pa',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.PDI_053',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'d65e9bcd-9f20-4020-acb8-ba0b13688105',
+            'paramName':'2#焚烧炉点火燃烧器燃料流量',
+            'paramUnit':'kg/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.RY_FI_RSQ02',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'02d3084d-92b5-46cf-8dff-41e15aa77768',
+            'paramName':'2#焚烧炉二次风机电流',
+            'paramUnit':'A',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.RF_CE1',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'996ef1d1-433b-4f4f-a10b-ff8a9f0608b7',
+            'paramName':'2#焚烧炉辅助燃烧器燃料流量',
+            'paramUnit':'kg/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.RY_FI_RSQ04',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'5dda283a-a1f1-4f20-a84d-6c0bb07121a7',
+            'paramName':'2#焚烧炉给水流量',
+            'paramUnit':'t/h',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine2.FRCQ_001COM',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'3e255aec-49b0-4312-91c1-ce772a31fcb2',
+            'paramName':'2#焚烧炉给水温度',
+            'paramUnit':'°C',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine2.TRA_001',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'f6146018-23f1-40ac-b31f-04bce0c602b1',
+            'paramName':'2#焚烧炉给水压力',
+            'paramUnit':'mpa',
+			'paramType':'原料',
+            'tag':'Applications.BurningLine2.PRA_001',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'c69922cd-4c2d-43a7-a010-635451a171bc',
+            'paramName':'2#焚烧炉活性炭流量',
+            'paramUnit':'kg/h',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.HXT01_SJLL',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'0a1f1ca7-88d6-4d46-bbb4-dc3c35bee6c5',
+            'paramName':'2#焚烧炉炉内干法称重仓重量',
+            'paramUnit':'kg',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF2_SSZL_WI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'e4bab47e-baf6-43e6-91bb-3b43fb4c653b',
+            'paramName':'2#焚烧炉炉内干法粉料累计',
+            'paramUnit':'kg',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF2_SSZL_ACC',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'67346c4f-d890-40c0-adea-e9697f63c589',
+            'paramName':'2#焚烧炉炉内干法粉料流量',
+            'paramUnit':'kg/h',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine1.GF2_Speed_h',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'07ca3a3e-5297-467f-a634-366818f13d10',
+            'paramName':'2#焚烧炉炉膛压力',
+            'paramUnit':'pa',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.PRCA_019L',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'8bee808d-f405-4349-9372-cc6587a99330',
+            'paramName':'2#焚烧炉雾化器石灰浆液流量',
+            'paramUnit':'t/h',
+			'paramType':'治理',
+            'tag':'WHQ2..FI_001_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'4a12f92f-b5bd-482f-a77b-183b1be67603',
+            'paramName':'2#焚烧炉雾化器转速',
+            'paramUnit':'rpm',
+			'paramType':'治理',
+            'tag':'WHQ2...WHDJ_CS1_AI',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'e2c35273-0078-419b-8d52-cb56071e0d35',
+            'paramName':'2#焚烧炉一次风机电流',
+            'paramUnit':'A',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.GF_CE1',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'2239a32f-64d8-409e-858c-99f238944957',
+            'paramName':'2#焚烧炉一次风流量',
+            'paramUnit':'m³/h',
+			'paramType':'能耗',
+            'tag':'Applications.BurningLine2.FRQ_007COM_ACC',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'26a143a5-a091-4d5e-9379-1d9b06f080cf',
+            'paramName':'2#焚烧炉引风机电流',
+            'paramUnit':'A',
+			'paramType':'治理',
+            'tag':'Applications.BurningLine2.YF_CE',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'24c98414-f3dd-411b-9637-58e0593a9e8b',
+            'paramName':'2#焚烧炉蒸汽流量',
+            'paramUnit':'t/h',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine1.FRCQ_004COM_RESET',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'d07e5eff-c9d2-4a96-a74e-c86af4f2ac00',
+            'paramName':'2#焚烧炉蒸汽温度',
+            'paramUnit':'°C',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine2.TRCA_010',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'00915267-696b-4eba-a15f-262abad2563e',
+            'paramName':'2#焚烧炉蒸汽压力',
+            'paramUnit':'mpa',
+			'paramType':'生产',
+            'tag':'Applications.BurningLine2.PRA_010B',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'a0f92b30-c62d-44ec-a231-30a175bbe936',
+            'paramName':'2#垃圾抓斗皮重',
+            'paramUnit':'t',
+			'paramType':'能耗',
+            'tag':'Applications.CommonParts.LJDC_AI078',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'189ee89c-06cd-4a50-8935-658de63be928',
+            'paramName':'2#垃圾抓斗重量',
+            'paramUnit':'t',
+			'paramType':'能耗',
+            'tag':'Applications.CommonParts.WRQ_0102',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'351f75a3-96c4-47c3-861e-a8a09f965459',
+            'paramName':'发电机有功功率',
+            'paramUnit':'mw',
+			'paramType':'生产',
+            'tag':'Applications.CommonParts.DEH_AI_04',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'30a451f4-0b67-4190-adeb-489804d89f94',
+            'paramName':'汽轮机进蒸汽流量',
+            'paramUnit':'t/h',
+			'paramType':'能耗',
+            'tag':'Applications.TurbineParts.FRQ_4101COM',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'f2b700eb-18a9-44cd-b149-adefed74333f',
+            'paramName':'汽轮机进蒸汽温度',
+            'paramUnit':'°C',
+			'paramType':'能耗',
+            'tag':'Applications.TurbineParts.TRA_4101',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'36116fa6-1796-40fc-9686-54ddeb48f219',
+            'paramName':'汽轮机进蒸汽压力',
+            'paramUnit':'mpa',
+			'paramType':'能耗',
+            'tag':'Applications.TurbineParts.PRA_4104',  //测点在源系统的code
+        },
+
+		{
+            'paramId':'f3107e25-b76d-46f3-8662-2e7e8ef5e348',
+            'paramName':'汽轮机转速',
+            'paramUnit':'rpm',
+			'paramType':'能耗',
+            'tag':'Applications.TurbineParts.SIA_4307',  //测点在源系统的code
         },
     ];
 
