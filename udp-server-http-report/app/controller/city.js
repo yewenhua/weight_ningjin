@@ -119,7 +119,7 @@ class CityController extends Controller {
                     method: 'POST',
                     data: {
                         enterpriseId: null,
-                        listParams: data
+                        listParams: JSON.stringify(data)
                     },
                     headers: header
                 };
