@@ -25,10 +25,10 @@ class CityController extends Controller {
 
             //数据格式化，生成传递需要的数据格式
             for(let item of newestRows){
-                if(item.value){
+                if(item.value && item.datetime){
                     data.push({
                         "paramId": item.paramId,
-                        "paramVal": Number(item.value) ? Number(item.value) : 0,
+                        "paramVal": Number(item.value),
                         "paramType": item.paramType,
                         "paramUnit": item.paramUnit,
                         "dataTime": ctx.helper.formatTime(item.datetime)
