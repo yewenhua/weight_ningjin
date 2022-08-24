@@ -37,40 +37,13 @@ class CityController extends Controller {
                 }
             }
 
-            console.log('999999999');
-            console.log(newestRows);
-
-            let dd = {
-                "listParams": data
-            }
-
-            console.log('0000000000');
-            console.log(dd);
-
-            let pp = {
-                "listParams": [
-                    {
-                        "paramId": "10dcd5bb-e1ed-43a6-a015-ca79b44e52f3",
-                        "paramVal": 131.762,
-                        "paramType": "治理",
-                        "paramUnit": "°C",
-                        "dataTime": "2022-08-24 13:48:54"
-                    },
-                    {
-                        "paramId": "00915267-696b-4eba-a15f-262abad2563e",
-                        "paramVal": 0.0336,
-                        "paramType": "生产",
-                        "paramUnit": "mpa",
-                        "dataTime": "2022-08-24 13:48:46"
-                    }
-                ]
-            }
-
             if(data.length > 0){
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
                     method: 'POST',
-                    data: dd,
+                    data: {
+                        "listParams": data
+                    },
                     headers: header
                 };
 
@@ -127,14 +100,16 @@ class CityController extends Controller {
 
             //数据格式化，生成传递需要的数据格式
             for(let item of lists){
-                data.push({
-                    "paramId": item.paramId,
-                    "paramVal": Number(item.value),
-                    "paramType": item.paramType,
-                    "paramUnit": item.paramUnit,
-                    "dataTime": ctx.helper.formatTime(item.datetime)
-                });
-                ids.push(item._id);
+                if(item.value && item.datetime){
+                    data.push({
+                        "paramId": item.paramId,
+                        "paramVal": Number(item.value),
+                        "paramType": item.paramType,
+                        "paramUnit": item.paramUnit,
+                        "dataTime": ctx.helper.formatTime(item.datetime)
+                    });
+                    ids.push(item._id);
+                }
             }
 
             if(data.length > 0){
@@ -142,7 +117,7 @@ class CityController extends Controller {
                     dataType: 'json', //以 JSON 格式处理返回的响应 body
                     method: 'POST',
                     data: {
-                        listParams: data
+                        "listParams": data
                     },
                     headers: header
                 };
