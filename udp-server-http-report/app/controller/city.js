@@ -61,7 +61,9 @@ class CityController extends Controller {
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
                     method: 'POST',
-                    data: p,
+                    data: {
+                        "listParams": data
+                    },
                     headers: header
                 };
 
