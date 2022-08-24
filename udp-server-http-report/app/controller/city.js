@@ -27,7 +27,7 @@ class CityController extends Controller {
             for(let item of newestRows){
                 data.push({
                     "paramId": item.paramId,
-                    "paramVal": item.value,
+                    "paramVal": Number(item.value),
                     "paramType": item.paramType,
                     "paramUnit": item.paramUnit,
                     "dataTime": ctx.helper.formatTime(item.datetime)
