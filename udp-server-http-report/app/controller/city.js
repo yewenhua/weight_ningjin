@@ -37,13 +37,31 @@ class CityController extends Controller {
                 ids.push(item._id);
             }
 
+            let p = {
+                "listParams": [
+                    {
+                        "paramId": "10dcd5bb-e1ed-43a6-a015-ca79b44e52f3",
+                        "paramVal": 131.762,
+                        "paramType": "治理",
+                        "paramUnit": "°C",
+                        "dataTime": "2022-08-24 13: 48: 54"
+                    },
+                    {
+                        "paramId": "00915267-696b-4eba-a15f-262abad2563e",
+                        "paramVal": 0.0336,
+                        "paramType": "生产",
+                        "paramUnit": "mpa",
+                        "dataTime": "2022-08-24 13: 48: 46"
+                    }
+                ]
+            };
+
+
             if(data.length > 0){
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
                     method: 'POST',
-                    data: {
-                        listParams: data
-                    },
+                    data: p,
                     headers: header
                 };
 
