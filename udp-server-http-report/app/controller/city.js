@@ -17,7 +17,7 @@ class CityController extends Controller {
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
             let token = await service.token.get();
             let header = {
-                "Content-Type": "application/json; charset=utf-8",
+                //"Content-Type": "application/json; charset=utf-8",
                 "Authorization": 'Bearer ' + token
             };
             let data = [];
