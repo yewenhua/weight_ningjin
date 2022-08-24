@@ -136,12 +136,47 @@ async function reportGarbageData(){
             continue;
         }
 
+        let proCode;
+        if(item.product.indexOf('生活垃圾') !== -1){
+            proCode = 1;
+        }
+        else if(item.product.indexOf('飞灰') !== -1){
+            proCode = 2;
+        }
+        else if(item.product.indexOf('炉渣') !== -1){
+            proCode = 3;
+        }
+        else if(item.product.indexOf('渗滤液') !== -1){
+            proCode = 4;
+        }
+        else if(item.product.indexOf('活性炭') !== -1){
+            proCode = 5;
+        }
+        else if(item.product.indexOf('消石灰') !== -1 || item.product.indexOf('氢氧化钙') !== -1){
+            proCode = 6;
+        }
+        else if(item.product.indexOf('螯合剂') !== -1){
+            proCode = 7;
+        }
+        else if(item.product.indexOf('水泥') !== -1){
+            proCode = 8;
+        }
+        else if(item.product.indexOf('氨水') !== -1){
+            proCode = 9;
+        }
+        else if(item.product.indexOf('盐酸') !== -1){
+            proCode = 10;
+        }
+        else{
+            continue;
+        }
+
         let itemParam =
         {
             "lsh": item.id,  //流水号
             "carNo": item.truckno,
             "cardNo": item.cardno, //ic卡号
-            "proCode": 1,     //1：生活垃圾；2：飞灰；3：炉渣；4：渗滤液；5：活性炭；6：消石灰；7：螯合剂；8：水泥；9：氨水；10：盐酸
+            "proCode": proCode,     //1：生活垃圾；2：飞灰；3：炉渣；4：渗滤液；5：活性炭；6：消石灰；7：螯合剂；8：水泥；9：氨水；10：盐酸
             //"originalSourceArea": item.sender,  //地磅系统中的货物来源
             //"transportUnit": item.transporter,       //运输单位
             "firstWeightTime": Utils.formatTime(new Date(item.firstdatetime).getTime()),     //进厂时间，精确到时分秒
