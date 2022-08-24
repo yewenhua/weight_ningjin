@@ -79,8 +79,15 @@
                         minWidth: 100
                     },
                     {
+                        title: '变量名称',
+                        key: 'tag',
+                        ellipsis: true,
+                        tooltip: true,
+                        minWidth: 100
+                    },
+                    {
                         title: '值',
-                        key: 'paramVal',
+                        key: 'value',
                         minWidth: 60
                     },
                     {
