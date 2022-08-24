@@ -30,7 +30,7 @@ class CityController extends Controller {
                     "paramVal": item.value,
                     "paramType": item.paramType,
                     "paramUnit": item.paramUnit,
-                    "dataTime": item.datetime,
+                    "dataTime": ctx.helper.formatTime(item.datetime)
                 });
                 ids.push(item._id);
             }
@@ -45,9 +45,6 @@ class CityController extends Controller {
                     },
                     headers: header
                 };
-
-                ctx.logger.warn('=========9999999999=========');
-                ctx.logger.warn(data);
 
                 const res = await ctx.curl(url, options);
                 ctx.logger.warn('=========report=========');
@@ -85,7 +82,6 @@ class CityController extends Controller {
 
     //上报出错时重新上报
     async retry() {
-        return false;
         const { app, ctx, service } = this;
         let nsp = app.io.of('/');
         let lists = await service.citydcs.findFailList();
@@ -108,7 +104,7 @@ class CityController extends Controller {
                     "paramVal": item.value,
                     "paramType": item.paramType,
                     "paramUnit": item.paramUnit,
-                    "dataTime": item.datetime,
+                    "dataTime": ctx.helper.formatTime(item.datetime)
                 });
                 ids.push(item._id);
             }
