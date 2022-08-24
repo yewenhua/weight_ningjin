@@ -38,12 +38,11 @@ class CityController extends Controller {
             if(data.length > 0){
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
-                    contentType: 'json',  //以 JSON 格式发送
                     method: 'POST',
-                    data: {
+                    content: JSON.stringify({
                         enterpriseId: null,
                         listParams: data
-                    },
+                    }),
                     headers: header
                 };
 
