@@ -5,7 +5,7 @@
                 <div class="logo">
                     <img :src="logo_img" alt="logo">
                 </div>
-                <div class="name">伟明环保数据上报平台（市平台）</div>
+                <div class="name">伟明环保数据上报平台</div>
             </div>
             <div class="mouse-wheel-wrapper" ref="scroll">
                 <Table border :columns="columns" :data="datalist" size="small" :loading="loading" class="tb" :max-height="tbHeight ? tbHeight : 0">
@@ -124,7 +124,7 @@
                             pageSize: vm.num,
                             currentPage: vm.page
                         },
-                        url: vm.baseURL + "/gas/page",
+                        url: vm.baseURL + "/city/page",
                         success: (data) => {
                             vm.loading = false;
                             vm.datalist = data.list;
