@@ -47,7 +47,7 @@ class CityController extends Controller {
                 };
 
                 ctx.logger.warn('=========99999999999999=========');
-                ctx.logger.warn(res);
+                ctx.logger.warn(data);
 
                 const res = await ctx.curl(url, options);
                 ctx.logger.warn('=========report=========');
