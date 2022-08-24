@@ -35,6 +35,9 @@ class CityController extends Controller {
                 ids.push(item._id);
             }
 
+            console.log('999999999');
+            console.log(newestRows);
+
             let dd = {
                 "listParams": data
             }
