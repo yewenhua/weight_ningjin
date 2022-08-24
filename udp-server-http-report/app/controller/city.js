@@ -35,6 +35,13 @@ class CityController extends Controller {
                 ids.push(item._id);
             }
 
+            let dd = {
+                "listParams": data
+            }
+
+            console.log('0000000000');
+            console.log(dd);
+
             let pp = {
                 "listParams": [
                     {
