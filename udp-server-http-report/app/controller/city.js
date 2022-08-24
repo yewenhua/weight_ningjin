@@ -17,7 +17,7 @@ class CityController extends Controller {
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
             let token = await service.token.get();
             let header = {
-                "Content-Type": "application/json; charset=utf-8",
+                //"Content-Type": "application/json; charset=utf-8",
                 "Authorization": 'Bearer ' + token
             };
             let data = [];
@@ -35,12 +35,13 @@ class CityController extends Controller {
                 ids.push(item._id);
             }
 
-
             if(data.length > 0){
                 let options = {
-                    dataType: 'json',
+                    dataType: 'json',     //以 JSON 格式处理响应
+                    contentType: 'json',  //以 JSON 格式发送
                     method: 'POST',
                     data: {
+                        enterpriseId: null,
                         listParams: data
                     },
                     headers: header
@@ -95,7 +96,7 @@ class CityController extends Controller {
             //let token = await service.token.get();
             let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6Ijc4NjMxODllLWNiYjItNDllNi1hYTY2LWNjZTQ2NTQ0YzhmOCJ9.AiUS62d7dyZXByDJXJvU6i-Yxb9lA_iY2y49G-XjUQ1I0c2SEZ9UTOqUyjoi16ywqmVc2C7RpKTHVauJ_29VIA';
             let header = {
-                "Content-Type": "application/json; charset=utf-8",
+                "Content-Type": "application/json",
                 "Authorization": 'Bearer ' + token
             };
             let data = [];
@@ -118,8 +119,7 @@ class CityController extends Controller {
                     dataType: 'json', //以 JSON 格式处理返回的响应 body
                     method: 'POST',
                     data: {
-                        enterpriseId: null,
-                        listParams: JSON.stringify(data)
+                        listParams: data
                     },
                     headers: header
                 };
