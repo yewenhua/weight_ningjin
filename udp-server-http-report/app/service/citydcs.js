@@ -50,7 +50,7 @@ class CityDcsService extends Service {
             const jsonObject = Object.assign({}, e._doc);
             jsonObject.key = i;
             jsonObject.createdAt = this.ctx.helper.formatTime(e.createdAt);
-            jsonObject.time = this.ctx.helper.formatTime(e.acquisitionDatetime);
+            jsonObject.time = this.ctx.helper.formatTime(e.dataTime);
             return jsonObject;
         });
 
