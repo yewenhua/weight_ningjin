@@ -15,7 +15,8 @@ class CityController extends Controller {
             let port = app.config.avs.port;
             let host = app.config.avs.host;
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
-            let token = await service.token.get();
+            //let token = await service.token.get();
+            let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6Ijc4NjMxODllLWNiYjItNDllNi1hYTY2LWNjZTQ2NTQ0YzhmOCJ9.AiUS62d7dyZXByDJXJvU6i-Yxb9lA_iY2y49G-XjUQ1I0c2SEZ9UTOqUyjoi16ywqmVc2C7RpKTHVauJ_29VIA';
             let header = {
                 "Content-Type": "application/json; charset=utf-8",
                 "Authorization": 'Bearer ' + token
@@ -91,8 +92,7 @@ class CityController extends Controller {
             let port = app.config.avs.port;
             let host = app.config.avs.host;
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
-            //let token = await service.token.get();
-            let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6Ijc4NjMxODllLWNiYjItNDllNi1hYTY2LWNjZTQ2NTQ0YzhmOCJ9.AiUS62d7dyZXByDJXJvU6i-Yxb9lA_iY2y49G-XjUQ1I0c2SEZ9UTOqUyjoi16ywqmVc2C7RpKTHVauJ_29VIA';
+            let token = await service.token.get();
             let header = {
                 "Content-Type": "application/json",
                 "Authorization": 'Bearer ' + token
