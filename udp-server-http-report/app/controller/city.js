@@ -115,7 +115,7 @@ class CityController extends Controller {
 
             if(data.length > 0){
                 let options = {
-                    dataType: 'json',
+                    //dataType: 'json',
                     method: 'POST',
                     data: {
                         enterpriseId: null,
