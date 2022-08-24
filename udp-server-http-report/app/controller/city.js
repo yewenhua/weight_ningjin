@@ -17,7 +17,7 @@ class CityController extends Controller {
             let url = host + ':' + port + "/prod-api/base/home/gkDataPush";
             let token = await service.token.get();
             let header = {
-                //"Content-Type": "application/json; charset=utf-8",
+                "Content-Type": "application/json; charset=utf-8",
                 "Authorization": 'Bearer ' + token
             };
             let data = [];
@@ -40,11 +40,8 @@ class CityController extends Controller {
                     dataType: 'json',     //以 JSON 格式处理响应
                     method: 'POST',
                     data: {
-                        params: {
-                            listParams: data
-                        }
+                        listParams: data
                     },
-                    contentType: 'json',
                     headers: header
                 };
 
