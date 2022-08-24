@@ -57,14 +57,14 @@ class UdpClientJob implements ShouldQueue
         $tagsNameString = '';
         $datalist = array();
         $i = 0;
-        $num = 20;
+        $num = 5;
         $tag_str_arr = array();
         foreach ($tags as $key => $tag) {
             if(!$tagsNameString){
-                $tagsNameString = $tag;
+                $tagsNameString = $prefix.'.'.$tag;
             }
             else{
-                $tagsNameString .= ';'.$tag;
+                $tagsNameString .= ';'.$prefix.'.'.$tag;
             }
 
             if($i > 0 && ($i % $num) == 0){
@@ -80,13 +80,17 @@ class UdpClientJob implements ShouldQueue
         }
 
         foreach ($tag_str_arr as $key => $tag_str) {
+            Log::info('00000000');
+            Log::info(var_export($tag_str, true));
             $res = HistorianService::currentData($tag_str);
+            Log::info('11111111111111111');
+            Log::info(var_export($res, true));
             if ($res['code'] === 0 && $res['data']['ErrorCode'] === 0) {
                 $datas = $res['data']['Data'];
                 $datalist = array_merge($datalist, $datas);
             }
         }
-        Log::info('00000000');
+        Log::info('222222222222');
         Log::info(var_export($datalist, true));
         return $datalist;
     }
