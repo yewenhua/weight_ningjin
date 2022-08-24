@@ -173,7 +173,7 @@ return [
     "Applications.TurbineParts.TI_4114",
     "Applications.TurbineParts.PI_4118",
     "Applications.TurbineParts.TI_4115",
-    "Applications.TurbineParts.PRA_4160_QJ",
+    "Applications.TurbineParts.PRA_4160",
     "Applications.TurbineParts.PI_4222",
     "Applications.TurbineParts.LIA_4201",
     "Applications.TurbineParts.PI_4222",
