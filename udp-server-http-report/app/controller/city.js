@@ -63,7 +63,7 @@ class CityController extends Controller {
 
                 const res = await ctx.curl(url, options);
                 ctx.logger.warn('=========report=========');
-                ctx.logger.warn(res);
+                ctx.logger.warn(res.data);
                 if(res && res.status == 200 && res.data && res.data.code == 200){
                     let resUpdate = await service.citydcs.updateFlag(ids, 'success');
                     if(resUpdate && resUpdate.nModified >= 1){
@@ -149,7 +149,7 @@ class CityController extends Controller {
 
                 const res = await ctx.curl(url, options);
                 ctx.logger.warn('=========retry=========');
-                ctx.logger.warn(res);
+                ctx.logger.warn(res.data);
                 if(res && res.status == 200 && res.data && res.data.code == 200){
                     let resUpdate = await service.citydcs.updateFlag(ids, 'success');
                     if(resUpdate && resUpdate.nModified >= 1){
