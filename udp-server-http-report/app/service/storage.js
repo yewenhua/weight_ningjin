@@ -79,15 +79,15 @@ class StorageService extends Service {
 
         //省平台
         if(data_provincce.length > 0){
-            console.log('=====provincce======');
-            console.log(data_provincce.length);
+            //console.log('=====provincce======');
+            //console.log(data_provincce.length);
             await this.ctx.model.ProvinceDcs.insertMany(data_provincce);
         }
 
         //市平台
         if(data_city.length > 0){
-            console.log('=====city======');
-            console.log(data_city.length);
+            //console.log('=====city======');
+            //console.log(data_city.length);
             await this.ctx.model.CityDcs.insertMany(data_city);
         }
     }
