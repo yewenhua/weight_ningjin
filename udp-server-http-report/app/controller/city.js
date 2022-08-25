@@ -28,7 +28,7 @@ class CityController extends Controller {
                 if(item.value && item.datetime){
                     data.push({
                         "paramId": item.paramId,
-                        "paramVal": Number(item.value),
+                        "paramVal": item.value == 'false' || item.value == 'true' ? item.value : Number(item.value),
                         "paramType": item.paramType,
                         "paramUnit": item.paramUnit,
                         "dataTime": ctx.helper.formatTime(item.datetime)
@@ -106,7 +106,7 @@ class CityController extends Controller {
                 if(item.value && item.datetime){
                     data.push({
                         "paramId": item.paramId,
-                        "paramVal": Number(item.value),
+                        "paramVal": item.value == 'false' || item.value == 'true' ? item.value : Number(item.value),
                         "paramType": item.paramType,
                         "paramUnit": item.paramUnit,
                         "dataTime": ctx.helper.formatTime(item.datetime)
