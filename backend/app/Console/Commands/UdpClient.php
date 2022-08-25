@@ -39,8 +39,7 @@ class UdpClient extends Command
      */
     public function handle()
     {
-        //$this->getAndSendData();
-        $this->test();
+        $this->getAndSendData();
         return 0;
     }
 
@@ -49,7 +48,7 @@ class UdpClient extends Command
         $tags = config('udp');
         $tagsNameString = '';
         $i = 0;
-        $num = 5;
+        $num = 20;
         $tag_str_arr = array();
         $final_list = array();
         foreach ($tags as $key => $tag) {
@@ -74,9 +73,6 @@ class UdpClient extends Command
 
         foreach ($tag_str_arr as $key => $tag_str) {
             $res = HistorianService::currentData($tag_str);
-            //Log::info('222222222222');
-            //Log::info(var_export($res, true));
-
             if ($res['code'] === 0 && $res['data']['ErrorCode'] === 0) {
                 $datalist = $res['data']['Data'];
                 $return = array();
