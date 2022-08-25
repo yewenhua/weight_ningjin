@@ -1,12 +1,12 @@
 const Service = require('egg').Service;
 
-class CityDcsService extends Service {
+class ProvinceDcsService extends Service {
     constructor(ctx) {
         super(ctx);
     }
 
     async create(payload) {
-        return await this.ctx.model.CityDcs.create(payload);
+        return await this.ctx.model.ProvinceDcs.create(payload);
     }
 
     async index(payload) {
@@ -16,32 +16,32 @@ class CityDcsService extends Service {
         let skip = ((Number(currentPage)) - 1) * Number(pageSize || 10);
         if (isPaging) {
             if (search) {
-                res = await this.ctx.model.CityDcs.find({ tag: { $regex: search } })
+                res = await this.ctx.model.ProvinceDcs.find({ tag: { $regex: search } })
                     .skip(skip)
                     .limit(Number(pageSize))
                     .sort({ createdAt: -1 })
                     .exec();
                 count = res.length;
             } else {
-                res = await this.ctx.model.CityDcs.find({})
+                res = await this.ctx.model.ProvinceDcs.find({})
                     .skip(skip)
                     .limit(Number(pageSize))
                     .sort({ createdAt: -1 })
                     .exec();
-                count = await this.ctx.model.CityDcs.count({})
+                count = await this.ctx.model.ProvinceDcs.count({})
                     .exec();
             }
         } else {
             if (search) {
-                res = await this.ctx.model.CityDcs.find({ tag: { $regex: search } })
+                res = await this.ctx.model.ProvinceDcs.find({ tag: { $regex: search } })
                     .sort({ createdAt: -1 })
                     .exec();
                 count = res.length;
             } else {
-                res = await this.ctx.model.CityDcs.find({})
+                res = await this.ctx.model.ProvinceDcs.find({})
                     .sort({ createdAt: -1 })
                     .exec();
-                count = await this.ctx.model.CityDcs.count({})
+                count = await this.ctx.model.ProvinceDcs.count({})
                     .exec();
             }
         }
@@ -59,7 +59,7 @@ class CityDcsService extends Service {
 
     async findLatest() {
         const { ctx } = this;
-        const rows = await ctx.model.CityDcs
+        const rows = await ctx.model.ProvinceDcs
         .find({
             deletetime: null,
             flag: 'init'
@@ -75,7 +75,7 @@ class CityDcsService extends Service {
         const { ctx } = this;
         const timestamp = (new Date()).getTime() - 60 * 60 * 1000;
         const date = (new Date()).setTime(timestamp);
-        const rows = await ctx.model.CityDcs
+        const rows = await ctx.model.ProvinceDcs
         .find({"$or": [
             {
                 flag: 'fail'
@@ -96,7 +96,7 @@ class CityDcsService extends Service {
 
     async updateFlag(ids, value) {
         const { ctx } = this;
-        let res = await this.ctx.model.CityDcs.updateMany({
+        let res = await this.ctx.model.ProvinceDcs.updateMany({
             _id: {
                 $in: ids
             }
@@ -109,7 +109,7 @@ class CityDcsService extends Service {
 
     async deleteByIds(ids) {
         const { ctx } = this;
-        let res = await ctx.model.CityDcs.updateMany({
+        let res = await ctx.model.ProvinceDcs.updateMany({
             _id: {
                 $in: ids
             }
@@ -122,7 +122,7 @@ class CityDcsService extends Service {
     async findMonthBefore() {
         const { ctx } = this;
         const endTimestamp = (new Date()).getTime() - 7 * 24 * 60 * 60 * 1000;
-        const rows = await ctx.model.CityDcs
+        const rows = await ctx.model.ProvinceDcs
         .find({
             datetime: {
                 $lt: (new Date()).setTime(endTimestamp)
@@ -136,12 +136,12 @@ class CityDcsService extends Service {
 
     async destroyById(_id) {
         const { ctx } = this;
-        const row = await ctx.model.CityDcs.find(_id);
+        const row = await ctx.model.ProvinceDcs.find(_id);
         if (!row) {
-            ctx.throw(404, 'citydcs not found');
+            ctx.throw(404, 'ProvinceDcs not found');
         }
-        return await ctx.model.CityDcs.findByIdAndRemove(_id);
+        return await ctx.model.ProvinceDcs.findByIdAndRemove(_id);
     }
 }
 
-module.exports = CityDcsService;
+module.exports = ProvinceDcsService;

@@ -165,6 +165,13 @@ class CityController extends Controller {
                 await service.citydcs.destroyById(item._id);
             }
         }
+
+        let rows = await service.provincedcs.findMonthBefore();
+        if(rows && rows.length > 0){
+            for(let item of rows){
+                await service.provincedcs.destroyById(item._id);
+            }
+        }
     }
 
     async index() {
