@@ -105,11 +105,11 @@
                         key: 'time',
                         minWidth: 60
                     },
-                    {
-                        title: '上报时间',
-                        key: 'createdAt',
-                        minWidth: 150
-                    },
+                    // {
+                    //     title: '上报时间',
+                    //     key: 'createdAt',
+                    //     minWidth: 150
+                    // },
                     {
                         title: '状态',
                         slot: 'flag',
