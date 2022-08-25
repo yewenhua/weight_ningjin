@@ -166,9 +166,9 @@ class CityController extends Controller {
             }
         }
 
-        let rows = await service.provincedcs.findMonthBefore();
-        if(rows && rows.length > 0){
-            for(let item of rows){
+        let rows2 = await service.provincedcs.findMonthBefore();
+        if(rows2 && rows2.length > 0){
+            for(let item of rows2){
                 await service.provincedcs.destroyById(item._id);
             }
         }
