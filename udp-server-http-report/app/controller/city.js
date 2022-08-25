@@ -25,7 +25,7 @@ class CityController extends Controller {
 
             //数据格式化，生成传递需要的数据格式
             for(let item of newestRows){
-                if(item.value && item.datetime){
+                if(item.datetime){
                     let val;
                     if(item.value == 'false'){
                         val = 0;
@@ -48,8 +48,8 @@ class CityController extends Controller {
                 }
             }
 
-            ctx.logger.warn('1111111111111');
-            ctx.logger.warn(data);
+            //ctx.logger.warn('1111111111111');
+            //ctx.logger.warn(data);
 
             if(data.length > 0){
                 let options = {
@@ -114,7 +114,7 @@ class CityController extends Controller {
 
             //数据格式化，生成传递需要的数据格式
             for(let item of lists){
-                if(item.value && item.datetime){
+                if(item.datetime){
                     let val;
                     if(item.value == 'false'){
                         val = 0;
