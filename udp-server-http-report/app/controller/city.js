@@ -104,9 +104,20 @@ class CityController extends Controller {
             //数据格式化，生成传递需要的数据格式
             for(let item of lists){
                 if(item.value && item.datetime){
+                    let val;
+                    if(item.value == 'false'){
+                        val = 0;
+                    }
+                    else if(item.value == 'true'){
+                        val = 1;
+                    }
+                    else{
+                        val = Number(item.value);
+                    }
+                    
                     data.push({
                         "paramId": item.paramId,
-                        "paramVal": item.value == 'false' || item.value == 'true' ? item.value : Number(item.value),
+                        "paramVal": val,
                         "paramType": item.paramType,
                         "paramUnit": item.paramUnit,
                         "dataTime": ctx.helper.formatTime(item.datetime)
