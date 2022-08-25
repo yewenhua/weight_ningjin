@@ -7,7 +7,7 @@ module.exports = app => {
             required: [ true, 'tag 是必须的' ] //设备Code，设备类型 + 设备编码. 同deviceId
         },
         value: {
-            type: String,
+            type: Number,
             required: [ true, 'value 是必须的' ] //指标数值
         },
         datetime: {

@@ -21,16 +21,27 @@ class StorageService extends Service {
                 if(value == 'None' || value == 'none' || value == '' || value == 'null' || !value){
                     //continue;
                 }
-                if(value.indexOf('.') !== -1){
+                else if(value == 'false' || value == 'False'){
+                    value = 0;
+                }
+                else if(value == 'true' || value == 'True'){
+                    value = 1;
+                }
+                else if(value.indexOf('.') !== -1){
                     value = Number(item[1]);
                     value = value.toFixed(4);
                 }
+                else{
+                    value = Number(value);
+                }
+
                 let time = (new Date(item[3])).getTime();
                 let tagCnName, code, paramId, paramName, paramUnit, paramType;
 
                 //循环省平台配置文件获取中文名和编码
                 for(let tagItem of cfg_tags){
                     if(tag == tagItem.sourceCode){
+
                         tagCnName = tagItem.cnName;
                         code = tagItem.itemCode;
                         data_provincce.push({

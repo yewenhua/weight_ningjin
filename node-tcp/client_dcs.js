@@ -129,7 +129,7 @@ async function reportDcsData(){
     for(let item of datalist){
         itemParam = {
             "itemCode": item.code,      //测点在管控平台的CODE
-            "itemValue": item.value,    //测点的值
+            "itemValue": Number(item.value),    //测点的值
             "sourceCode": item.tag,     //测点在源系统的code
             "instanceTime": new Date(item.datetime),        //测点数据的监测时间
             "sysId":1    //系统编号(用于区分同一个电厂的一期、二期)

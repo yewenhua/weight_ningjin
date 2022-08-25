@@ -1,7 +1,7 @@
 {
     "province_dcs": {
         "tag": "String",
-        "value": "String",
+        "value": "Number",
         "datetime": "String",
         "cn_name": "String",
         "flag": "String",
