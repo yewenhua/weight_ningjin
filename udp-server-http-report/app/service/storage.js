@@ -9,8 +9,8 @@ class StorageService extends Service {
         const { ctx, app } = this;
         let data_provincce = [];
         let data_city = [];
-        console.log('=====插入DCS数据======');
-        console.log(params.length);
+        //console.log('=====插入DCS数据======');
+        //console.log(params.length);
         //return false;
         if(params && params.length > 0){
             let cfg_tags = app.config.dcsTags;
