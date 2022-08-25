@@ -37,6 +37,9 @@ class CityController extends Controller {
                 }
             }
 
+            ctx.logger.warn('1111111111111');
+            ctx.logger.warn(data);
+
             if(data.length > 0){
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
