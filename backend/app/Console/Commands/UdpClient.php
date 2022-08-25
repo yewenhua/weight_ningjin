@@ -74,8 +74,8 @@ class UdpClient extends Command
 
         foreach ($tag_str_arr as $key => $tag_str) {
             $res = HistorianService::currentData($tag_str);
-            Log::info('222222222222');
-            Log::info(var_export($res, true));
+            //Log::info('222222222222');
+            //Log::info(var_export($res, true));
 
             if ($res['code'] === 0 && $res['data']['ErrorCode'] === 0) {
                 $datalist = $res['data']['Data'];
@@ -83,6 +83,7 @@ class UdpClient extends Command
                 foreach ($datalist as $key => $item) {
                     if($item['Samples'] && !empty($item['Samples'])){
                         $return[] = array(
+                            substr($item['TagName'], strlen($prefix) + 1)
                             $item['Samples'][0]['Value'],
                             $item['Samples'][0]['Quality'],
                             $item['Samples'][0]['TimeStamp']
@@ -97,59 +98,9 @@ class UdpClient extends Command
 
         if(!empty($final_list)){
             foreach ($final_list as $key => $data) {
-                dispatch(new UdpClientJob(json_encode($return)));
+                dispatch(new UdpClientJob(json_encode($data)));
                 sleep(1);
             }
-        }
-    }
-
-    private function test(){
-        $data = array(
-            array(456, 6, '2022-08-24 12:12:40'),
-            array(456, 6, '2022-08-24 12:12:41'),
-            array(456, 6, '2022-08-24 12:12:42'),
-            array(456, 6, '2022-08-24 12:12:43'),
-            array(456, 6, '2022-08-24 12:12:44'),
-            array(456, 6, '2022-08-24 12:12:45'),
-            array(456, 6, '2022-08-24 12:12:46'),
-            array(456, 6, '2022-08-24 12:12:47'),
-            array(456, 6, '2022-08-24 12:12:48'),
-            array(456, 6, '2022-08-24 12:12:49'),
-            array(456, 6, '2022-08-24 12:12:40'),
-            array(456, 6, '2022-08-24 12:12:41'),
-            array(456, 6, '2022-08-24 12:12:42'),
-            array(456, 6, '2022-08-24 12:12:43'),
-            array(456, 6, '2022-08-24 12:12:44'),
-            array(456, 6, '2022-08-24 12:12:45'),
-            array(456, 6, '2022-08-24 12:12:46'),
-            array(456, 6, '2022-08-24 12:12:47'),
-            array(456, 6, '2022-08-24 12:12:48'),
-            array(456, 6, '2022-08-24 12:12:49'),
-            array(456, 6, '2022-08-24 12:12:40'),
-            array(456, 6, '2022-08-24 12:12:41'),
-            array(456, 6, '2022-08-24 12:12:42'),
-            array(456, 6, '2022-08-24 12:12:43'),
-            array(456, 6, '2022-08-24 12:12:44'),
-            array(456, 6, '2022-08-24 12:12:45'),
-            array(456, 6, '2022-08-24 12:12:46'),
-            array(456, 6, '2022-08-24 12:12:47'),
-            array(456, 6, '2022-08-24 12:12:48'),
-            array(456, 6, '2022-08-24 12:12:49'),
-            array(456, 6, '2022-08-24 12:12:40'),
-            array(456, 6, '2022-08-24 12:12:41'),
-            array(456, 6, '2022-08-24 12:12:42'),
-            array(456, 6, '2022-08-24 12:12:43'),
-            array(456, 6, '2022-08-24 12:12:44'),
-            array(456, 6, '2022-08-24 12:12:45'),
-            array(456, 6, '2022-08-24 12:12:46'),
-            array(456, 6, '2022-08-24 12:12:47'),
-            array(456, 6, '2022-08-24 12:12:48'),
-            array(456, 6, '2022-08-24 12:12:49'),
-        );
-
-        for($i=0; $i<10; $i++){
-            dispatch(new UdpClientJob(json_encode($data)));
-            sleep(1);
         }
     }
 }
