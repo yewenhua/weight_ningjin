@@ -416,7 +416,15 @@ module.exports = appInfo => {
             'paramName':'1#垃圾抓斗重量',
             'paramUnit':'t',
 			'paramType':'能耗',
-            'tag':'Applications.CommonParts.WRQ_0101',  //测点在源系统的code
+            'tag':'Applications.CommonParts.LJDC_AI012',  //测点在源系统的code
+        },
+
+        {
+            'paramId':'114d6465-5327-42aa-b4cf-8879331b3f54',
+            'paramName':'1#垃圾抓斗皮量',
+            'paramUnit':'t',
+			'paramType':'能耗',
+            'tag':'Applications.CommonParts.LJDC_AI034',  //测点在源系统的code
         },
 
 		{
@@ -696,7 +704,7 @@ module.exports = appInfo => {
             'paramName':'2#垃圾抓斗重量',
             'paramUnit':'t',
 			'paramType':'能耗',
-            'tag':'Applications.CommonParts.WRQ_0102',  //测点在源系统的code
+            'tag':'Applications.CommonParts.LJDC_AI056',  //测点在源系统的code
         },
 
 		{
@@ -1912,8 +1920,14 @@ module.exports = appInfo => {
 
 		{
             'itemCode': 'LJC_ZDDCZ',  //测点在管控平台的CODE
-            'sourceCode': 'Applications.CommonParts.WRQ_0101',  //测点在源系统的code
-            'cnName': '抓斗吊称重',  //测点中文名
+            'sourceCode': 'Applications.CommonParts.LJDC_AI012',  //测点在源系统的code
+            'cnName': '1#抓斗吊称重',  //测点中文名
+        },
+
+        {
+            'itemCode': 'LJC_ZDDCZ',  //测点在管控平台的CODE
+            'sourceCode': 'Applications.CommonParts.LJDC_AI056',  //测点在源系统的code
+            'cnName': '2#抓斗吊称重',  //测点中文名
         },
 
 		{
