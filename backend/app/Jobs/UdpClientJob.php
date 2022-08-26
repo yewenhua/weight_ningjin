@@ -32,7 +32,7 @@ class UdpClientJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->socket_udp_client($ip='127.0.0.1', $port='8899', $this->data);
+        $this->socket_udp_client($ip='172.20.20.11', $port='8899', $this->data);
     }
 
     /**

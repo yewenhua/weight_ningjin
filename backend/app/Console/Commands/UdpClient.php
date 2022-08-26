@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Jobs\UdpClientJob;
 use HistorianService;
+use Log;
 
 class UdpClient extends Command
 {
@@ -73,13 +74,16 @@ class UdpClient extends Command
 
         foreach ($tag_str_arr as $key => $tag_str) {
             $res = HistorianService::currentData($tag_str);
+            //Log::info('222222222222');
+            //Log::info(var_export($res, true));
+
             if ($res['code'] === 0 && $res['data']['ErrorCode'] === 0) {
                 $datalist = $res['data']['Data'];
                 $return = array();
                 foreach ($datalist as $key => $item) {
                     if($item['Samples'] && !empty($item['Samples'])){
                         $return[] = array(
-                            substr($item['TagName'], strlen($prefix) + 1)
+                            substr($item['TagName'], strlen($prefix) + 1),
                             $item['Samples'][0]['Value'],
                             $item['Samples'][0]['Quality'],
                             $item['Samples'][0]['TimeStamp']
