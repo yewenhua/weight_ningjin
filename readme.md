@@ -17,6 +17,7 @@
 2、下载redis windows版，安装并部署开机启动
 3、bat.crontab.bat为计划任务脚本，设置windows计划任务，开机启动，最高权限运行，无论用户登录与否都运行，触发器每天运行一次，重复任务间隔1分钟
 4、bat.queue-work.bat为队列服务脚本设置开机启动，最高权限运行，无论用户登录与否都运行
+5、计划任务部署方式参考https://blog.csdn.net/daily886/article/details/81261244
 
 五、node-tcp内程序部署说明
 1、分地磅数据上报程序和DCS数据上报程序
