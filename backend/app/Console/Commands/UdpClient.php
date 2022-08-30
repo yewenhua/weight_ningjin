@@ -40,6 +40,8 @@ class UdpClient extends Command
      */
     public function handle()
     {
+        Log::info('000000000000000');
+        return false;
         $this->getAndSendData();
         return 0;
     }
