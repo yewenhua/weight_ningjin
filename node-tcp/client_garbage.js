@@ -239,9 +239,6 @@ async function reportGarbageData(){
     }
 
     if(data.length > 0){
-        console.log('=========999999999999999=========');
-        console.log(data);
-
         let msgContent = JSON.stringify({
             secretKey: Utils.rsa_encode(public_key, aes_key),       //使用RSA公钥加密的AES密钥参数
             data: Utils.aes_encode2(aes_key, JSON.stringify(data))
