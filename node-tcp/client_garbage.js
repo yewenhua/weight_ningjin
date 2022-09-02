@@ -225,9 +225,9 @@ async function reportGarbageData(){
             //"transportUnit": item.transportUnit,       //运输单位
             "firstWeightTime": item.firstWeightTime,     //进厂时间，精确到时分秒
             "secondWeightTime": item.secondWeightTime,    //出厂时间，精确到时分秒
-            "gross": item.gross,  //毛重，单位：kg
-            "tare": item.tare,   //皮重，单位：kg
-            "net": item.net,    //净重，单位：kg
+            "gross": Number(item.gross),  //毛重，单位：吨
+            "tare": Number(item.tare),   //皮重，单位：吨
+            "net": Number(item.net),    //净重，单位：吨
             //"operator": item.operator,  //称重员
             //"tradeSysId": item.tradeSysId,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
             //"orgId": item.orgId,     //组织id
