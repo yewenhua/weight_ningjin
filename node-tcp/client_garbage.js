@@ -184,9 +184,9 @@ async function reportGarbageData(){
             //"transportUnit": item.transporter,       //运输单位
             "firstWeightTime": Utils.formatTime(new Date(item.firstdatetime).getTime()),     //进厂时间，精确到时分秒
             "secondWeightTime": Utils.formatTime(new Date(item.seconddatetime).getTime()),    //出厂时间，精确到时分秒
-            "gross": grossWeight,  //毛重，单位：吨
-            "tare": tareWeight,   //皮重，单位：吨
-            "net": netWeight,    //净重，单位：吨
+            "gross": Number(grossWeight),  //毛重，单位：吨
+            "tare": Number(tareWeight),   //皮重，单位：吨
+            "net": Number(netWeight),    //净重，单位：吨
             //"operator": item.operator,  //称重员
             //"tradeSysId": 1,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
             "dataStatus": 1,    //数据状态 1:生效 2:作废
