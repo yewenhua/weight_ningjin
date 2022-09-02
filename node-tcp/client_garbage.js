@@ -171,6 +171,9 @@ async function reportGarbageData(){
             continue;
         }
 
+        let grossWeight = ((new Number(item.gross))/1000).toFixed(2);
+        let tareWeight = ((new Number(item.tare))/1000).toFixed(2);
+        let netWeight = ((new Number(item.net))/1000).toFixed(2);
         let itemParam =
         {
             "lsh": item.id,  //流水号
@@ -181,9 +184,9 @@ async function reportGarbageData(){
             //"transportUnit": item.transporter,       //运输单位
             "firstWeightTime": Utils.formatTime(new Date(item.firstdatetime).getTime()),     //进厂时间，精确到时分秒
             "secondWeightTime": Utils.formatTime(new Date(item.seconddatetime).getTime()),    //出厂时间，精确到时分秒
-            "gross": item.gross,  //毛重，单位：kg
-            "tare": item.tare,   //皮重，单位：kg
-            "net": item.net,    //净重，单位：kg
+            "gross": grossWeight,  //毛重，单位：kg
+            "tare": tareWeight,   //皮重，单位：kg
+            "net": netWeight,    //净重，单位：kg
             //"operator": item.operator,  //称重员
             //"tradeSysId": 1,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
             "dataStatus": 1,    //数据状态 1:生效 2:作废
