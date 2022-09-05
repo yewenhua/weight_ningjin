@@ -17,6 +17,9 @@ module.exports = app => {
         paramId: {
             type: String,
         },
+        paramName: {
+            type: String,
+        },
         paramType: {
             type: String,
         },

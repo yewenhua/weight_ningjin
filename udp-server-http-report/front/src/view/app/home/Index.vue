@@ -73,7 +73,7 @@
                     },
                     {
                         title: '参数',
-                        key: 'cn_name',
+                        key: 'paramName',
                         ellipsis: true,
                         tooltip: true,
                         minWidth: 100
