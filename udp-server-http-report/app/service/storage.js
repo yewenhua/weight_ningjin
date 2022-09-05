@@ -58,7 +58,7 @@ class StorageService extends Service {
                 //循环市平台配置文件获取中文名和编码
                 for(let tagItem of city_tags){
                     if(tag == tagItem.tag){
-                        paramName = tagItem.cnName;
+                        paramName = tagItem.paramName;
                         paramUnit = tagItem.paramUnit;
                         paramType = tagItem.paramType;
                         paramId = tagItem.paramId;
