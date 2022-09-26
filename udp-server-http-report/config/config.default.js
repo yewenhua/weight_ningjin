@@ -376,7 +376,7 @@ module.exports = appInfo => {
             'paramName':'1#焚烧炉一次风流量',
             'paramUnit':'m³/h',
 			'paramType':'能耗',
-            'tag':'Applications.BurningLine1.FRQ_007COM_ACC',  //测点在源系统的code
+            'tag':'Applications.BurningLine1.FRQ_007COM',  //测点在源系统的code
         },
 
 		{
@@ -656,7 +656,7 @@ module.exports = appInfo => {
             'paramName':'2#焚烧炉一次风流量',
             'paramUnit':'m³/h',
 			'paramType':'能耗',
-            'tag':'Applications.BurningLine2.FRQ_007COM_ACC',  //测点在源系统的code
+            'tag':'Applications.BurningLine2.FRQ_007COM',  //测点在源系统的code
         },
 
 		{
