@@ -288,7 +288,7 @@ module.exports = appInfo => {
             'paramName':'1#焚烧炉给水流量',
             'paramUnit':'t/h',
 			'paramType':'原料',
-            'tag':'Applications.BurningLine1.FRCQ_001COM_RESET',  //测点在源系统的code
+            'tag':'Applications.BurningLine1.FRCQ_001COM',  //测点在源系统的code
         },
 
 		{
@@ -392,7 +392,7 @@ module.exports = appInfo => {
             'paramName':'1#焚烧炉蒸汽流量',
             'paramUnit':'t/h',
 			'paramType':'生产',
-            'tag':'Applications.BurningLine1.FRCQ_004COM_RESET',  //测点在源系统的code
+            'tag':'Applications.BurningLine1.FRCQ_004COM',  //测点在源系统的code
         },
 
 		{
@@ -672,7 +672,7 @@ module.exports = appInfo => {
             'paramName':'2#焚烧炉蒸汽流量',
             'paramUnit':'t/h',
 			'paramType':'生产',
-            'tag':'Applications.BurningLine1.FRCQ_004COM_RESET',  //测点在源系统的code
+            'tag':'Applications.BurningLine2.FRCQ_004COM',  //测点在源系统的code
         },
 
 		{
@@ -1505,13 +1505,13 @@ module.exports = appInfo => {
 
 		{
             'itemCode': 'YCFJ_FL',  //测点在管控平台的CODE
-            'sourceCode': 'Applications.BurningLine1.FRQ_007COM_RESET',  //测点在源系统的code
+            'sourceCode': 'Applications.BurningLine1.FRQ_007COM',  //测点在源系统的code
             'cnName': '1#炉一次风机风量',  //测点中文名
         },
 
 		{
             'itemCode': 'YCFJ_2LFL',  //测点在管控平台的CODE
-            'sourceCode': 'Applications.BurningLine2.FRQ_007COM_RESET',  //测点在源系统的code
+            'sourceCode': 'Applications.BurningLine2.FRQ_007COM',  //测点在源系统的code
             'cnName': '2#炉一次风机风量',  //测点中文名
         },
 
