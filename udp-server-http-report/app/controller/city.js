@@ -54,6 +54,7 @@ class CityController extends Controller {
             if(data.length > 0){
                 let options = {
                     dataType: 'json',     //以 JSON 格式处理响应
+                    timeout: 30000,
                     method: 'POST',
                     data: {
                         "listParams": data
@@ -140,6 +141,7 @@ class CityController extends Controller {
             if(data.length > 0){
                 let options = {
                     dataType: 'json', //以 JSON 格式处理返回的响应 body
+                    timeout: 30000,
                     method: 'POST',
                     data: {
                         "listParams": data
