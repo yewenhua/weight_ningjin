@@ -190,7 +190,7 @@ async function reportGarbageData(){
             //"operator": item.operator,  //称重员
             //"tradeSysId": 1,   //地磅系统id，如存在多个地磅称重系统，可用序号：1、2……来区分
             "dataStatus": 1,    //数据状态 1:生效 2:作废
-            "statDateNum": Utils.formatDateNumber((new Date()).getTime())  //磅单归属日期，值为出厂时间(secondWeightTime)的日期格式化，格式为：yyyyMMdd
+            "statDateNum": Utils.formatDateNumber((new Date(item.seconddatetime)).getTime())  //磅单归属日期，值为出厂时间(secondWeightTime)的日期格式化，格式为：yyyyMMdd
         }
         data.push(itemParam);
         ids.push(item.id);
