@@ -212,7 +212,13 @@ async function reportGarbageData(){
     }
 
     //上报失败的数据重新上报
-    let fail_sql = "SELECT top 5 * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
+    let fail_sql;
+    if(ids.length > 0){
+        fail_sql = "SELECT top 5 * FROM Weight WHERE flag = 'init' OR flag = 'fail' and lsh not in (" + ids.join + ")";
+    }
+    else{
+        fail_sql = "SELECT top 5 * FROM Weight WHERE flag = 'init' OR flag = 'fail'";
+    }
     let fail_report = await mssql_async(fail_sql);
     for(let item of fail_report.recordset){
         let itemParam =
